@@ -1,0 +1,250 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>prompt工程学习 | MugaiAshe's Blog</title><meta name="author" content="MugaiAshe"><meta name="copyright" content="MugaiAshe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="prompt工程理论知识与实用技巧总结">
+<meta property="og:type" content="article">
+<meta property="og:title" content="prompt工程学习">
+<meta property="og:url" content="https://mugaiashe.github.io/posts/285f5460.html">
+<meta property="og:site_name" content="MugaiAshe&#39;s Blog">
+<meta property="og:description" content="prompt工程理论知识与实用技巧总结">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mugaiashe.github.io/img/24-1.png">
+<meta property="article:published_time" content="2025-03-10T12:21:27.000Z">
+<meta property="article:modified_time" content="2025-07-16T04:44:02.239Z">
+<meta property="article:author" content="MugaiAshe">
+<meta property="article:tag" content="deeplearning">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mugaiashe.github.io/img/24-1.png"><link rel="shortcut icon" href="/img/lz.png"><link rel="canonical" href="https://mugaiashe.github.io/posts/285f5460.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        if (name && globalFn[key][name]) return
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":150,"languages":{"author":"作者: MugaiAshe","link":"链接: ","source":"来源: MugaiAshe's Blog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'medium_zoom',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'prompt工程学习',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-07-16 12:44:02'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load', preloader.endLoading)
+
+  if (false) {
+    btf.addGlobalFn('pjaxSend', preloader.initLoading, 'preloader_init')
+    btf.addGlobalFn('pjaxComplete', preloader.endLoading, 'preloader_end')
+  }
+})()</script><div id="web_bg" style="background: lightblue;"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/24-2.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">10</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/24-1.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/lz.png" alt="Logo"><span class="site-name">MugaiAshe's Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">prompt工程学习</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">prompt工程学习</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-03-10T12:21:27.000Z" title="发表于 2025-03-10 20:21:27">2025-03-10</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-07-16T04:44:02.239Z" title="更新于 2025-07-16 12:44:02">2025-07-16</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/prompt/">prompt</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">628</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>2分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p>前置知识：</p>
+<p>1.<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/696054303?utm_psn=1806677720320573440">轻松搞懂 Zero-Shot、One-Shot、Few-Shot - 知乎</a></p>
+<ul>
+<li><strong>Zero-Shot零样本学习：</strong>测试集中出现了训练集中没有的类别。需要模型通过对这个类别的描述，对没见过的类别进行分类。</li>
+<li><strong>One-Shot一次性学习：</strong>给出一个样例，可以理解为用一条数据fine-tune模型。属于<strong>Few-Shot学习的特例。</strong></li>
+<li><strong>Few-Shot少样本学习：</strong>对于只有少量样本的类别，希望模型在学习了一定类别的大量数据后，只需要少量的样本就能快速学习。</li>
+</ul>
+<p>2.<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/667478955">大模型「幻觉」，看这一篇就够了 | 哈工大华为出品 - 知乎</a></p>
+<p>大模型幻觉问题：模型生成的内容与现实世界事实或用户输入不一致的现象。</p>
+<h1 id="CoT思维链"><a href="#CoT思维链" class="headerlink" title="CoT思维链"></a>CoT思维链</h1><p>参考链接：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/670907685">一文读懂：思维链 CoT（Chain of Thought） - 知乎</a></p>
+<p>在从输入到输出的过程中加入详细的推理小步骤有助于提升推理能力。</p>
+<p>完整包含 CoT 的 Prompt 由指令（Instruction），逻辑依据（Rationale），示例（Exemplars）三部分组成。模型规模小、任务简单的情况下，CoT无效。</p>
+<p>不添加示例而仅仅在指令中添加一行经典的“<strong>Let’s think step by step</strong>”，就可以“唤醒”大模型的推理能力。</p>
+<p>构造CoT：</p>
+<ul>
+<li><strong>PoT</strong>：P 指 Programm 即程序，让模型生成代码在解释器中运行。</li>
+<li><strong>Tab-CoT</strong>：Tab 指 Tabular 表格，让大模型在每一步的推理中记录一个“∣步数∣子问题∣过程∣结果∣”的推理表格，并让大模型在推理时从生成的表格中提取答案。</li>
+<li><strong>ToT</strong>：T指Tree即树形结构。</li>
+<li><strong>GoT</strong>：G指Graph即图形结构。</li>
+</ul>
+<h1 id="结构化生成"><a href="#结构化生成" class="headerlink" title="结构化生成"></a>结构化生成</h1><h2 id="利用Prompt"><a href="#利用Prompt" class="headerlink" title="利用Prompt"></a>利用Prompt</h2><p>参考链接：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/13396632648">LLM结构化生成（Structured Generation） - 知乎</a></p>
+<p>利用Prompt是最简单的结构化生成方式，就是在prompt中说明输出的格式（如JSON）。</p>
+<p>存在问题：<strong>不稳定</strong>（格式错误、含义错误）</p>
+<p>简单的解决方案：生成——检查——修复</p>
+<p>指定规则检查输出，不符合要求则生成报错信息给模型，不断重新输出，直到输出符合要求。</p>
+<h2 id="限制解码Constrained-Decoding"><a href="#限制解码Constrained-Decoding" class="headerlink" title="限制解码Constrained Decoding"></a>限制解码Constrained Decoding</h2><p>就是控制输出的可能性，减少生成也有利于加速模型。</p>
+<p>将方案转化为正则表达式</p>
+<h1 id="待写"><a href="#待写" class="headerlink" title="待写"></a>待写</h1><ul>
+<li>支持多图推理的模型 eg.internvl模型    上下文模型 告诉实例，QA问法 </li>
+<li>decoding structure 输出结构化 structured generation，方便交互，parserable prompt</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://mugaiashe.github.io">MugaiAshe</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://mugaiashe.github.io/posts/285f5460.html">https://mugaiashe.github.io/posts/285f5460.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://mugaiashe.github.io/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://mugaiashe.github.io" target="_blank">MugaiAshe's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/deeplearning/">deeplearning</a></div><div class="post-share"><div class="social-share" data-image="/img/24-1.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/posts/ded5e95e.html" title="妙手回春拯救死刑虚拟机&amp;缩小虚拟机文件大小"><img class="cover" src="/img/head1.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">妙手回春拯救死刑虚拟机&缩小虚拟机文件大小</div></div><div class="info-2"><div class="info-item-1">ubuntu虚拟机进入死循环，内存爆满导致崩溃，磁盘也被占满。删除快照并不能影响虚拟机的内存大小，反而会因磁盘占满而无法删除，vmware又会失去该快照的记录无法重新删除，甚至会导致使虚拟机文件更大。 我将虚拟机整个文件夹移到空间充裕的硬盘上，然而移动过程中也恰好导致虚拟机发生错误，无法再次开机。 重新开机后会进入救援模式，选择Advanced options for Ubuntu，再选择较新版本带（recovery mode），显示（initramfs），这是因为虚拟机文件损坏，加载出现错误。使用fsck命令修复： 1fsck -y /dev/sdb1  将设备从sdb1到sdb3都试了一遍，扫描出错误就输入yes进行修复。重启能成功打开，接下来就是缩小虚拟机文件。  在vmware的虚拟机设置——硬盘中，有碎片整理、磁盘压缩，但并不好用，耗时长且缩小有限。  将“文件“中，选择将虚拟机另存为ovf文件，然后重新从ovf打开虚拟机。这种方法能有效缩小虚拟机大小，但会出现错误，可能与光盘文件有关。  个人认为最有效的方式是在正确安装了VMware...</div></div></div></a><a class="pagination-related" href="/posts/8363d6d0.html" title="IDA超快速上手干货"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">IDA超快速上手干货</div></div><div class="info-2"><div class="info-item-1">...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/posts/1c48dc28.html" title="深度学习花书笔记"><img class="cover" src="/img/deeplearning/network.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-11-29</div><div class="info-item-2">深度学习花书笔记</div></div><div class="info-2"><div class="info-item-1">现存疑问 反向传播？——模型分层（多个隐藏层），求梯度来进行优化的时候从后往前一层层地计算（因为链式法则） MLP？——多层网络（如全连接层）  数学知识线性代数生成子空间一组向量的生成子空间：原始向量线性组合能抵达的点的集合。 用于判断方程是否有解。 范数${ L^p }$ 范数定义：$$\left | x_p \right |  &#x3D; \left (\displaystyle\sum_{i}|x_i|^p \right )^{\frac{1}{p}}$$${ L^0 }$范数：向量中非零元素的个数。 ${ L^1 }$范数：向量中所有元素绝对值之和。 ${ L^2 }$范数（欧几里得范数）：向量元素绝对值的平方和再开方，计算向量长度。 ${ Frobenius}$范数：所有元素的平方和再开方，衡量矩阵大小。$${\left | A \right |}F &#x3D; \sqrt{\sum{i,j}A_{i,j}^{2} }$$${ L^ \infty  }$范数：向量中所有元素中最大的绝对值。 奇异值分解特征分解：$$A &#x3D; Vdiag(\lambda...</div></div></div></a></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/24-2.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">MugaiAshe</div><div class="author-info-description">莫听穿林打叶声，何妨吟啸且徐行</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">10</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">5</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">8</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/mugaiAshe"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/mugaiAshe" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="/songtt7@mail2.sysu.edu.cn" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">绝赞建设中——</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#CoT%E6%80%9D%E7%BB%B4%E9%93%BE"><span class="toc-number">1.</span> <span class="toc-text">CoT思维链</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%BB%93%E6%9E%84%E5%8C%96%E7%94%9F%E6%88%90"><span class="toc-number">2.</span> <span class="toc-text">结构化生成</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%A9%E7%94%A8Prompt"><span class="toc-number">2.1.</span> <span class="toc-text">利用Prompt</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%99%90%E5%88%B6%E8%A7%A3%E7%A0%81Constrained-Decoding"><span class="toc-number">2.2.</span> <span class="toc-text">限制解码Constrained Decoding</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%BE%85%E5%86%99"><span class="toc-number">3.</span> <span class="toc-text">待写</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/posts/ded5e95e.html" title="妙手回春拯救死刑虚拟机&amp;缩小虚拟机文件大小"><img src="/img/head1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="妙手回春拯救死刑虚拟机&amp;缩小虚拟机文件大小"/></a><div class="content"><a class="title" href="/posts/ded5e95e.html" title="妙手回春拯救死刑虚拟机&amp;缩小虚拟机文件大小">妙手回春拯救死刑虚拟机&amp;缩小虚拟机文件大小</a><time datetime="2025-04-19T09:41:38.000Z" title="发表于 2025-04-19 17:41:38">2025-04-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/285f5460.html" title="prompt工程学习"><img src="/img/24-1.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="prompt工程学习"/></a><div class="content"><a class="title" href="/posts/285f5460.html" title="prompt工程学习">prompt工程学习</a><time datetime="2025-03-10T12:21:27.000Z" title="发表于 2025-03-10 20:21:27">2025-03-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/8363d6d0.html" title="IDA超快速上手干货">IDA超快速上手干货</a><time datetime="2025-02-15T07:46:51.000Z" title="发表于 2025-02-15 15:46:51">2025-02-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/73d6a907.html" title="pwncollege"><img src="/img/24-2.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="pwncollege"/></a><div class="content"><a class="title" href="/posts/73d6a907.html" title="pwncollege">pwncollege</a><time datetime="2025-02-15T07:28:28.000Z" title="发表于 2025-02-15 15:28:28">2025-02-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/4d392897.html" title="工程实践中实用技巧——终端命令"><img src="/img/24-1.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="工程实践中实用技巧——终端命令"/></a><div class="content"><a class="title" href="/posts/4d392897.html" title="工程实践中实用技巧——终端命令">工程实践中实用技巧——终端命令</a><time datetime="2024-12-26T05:43:04.000Z" title="发表于 2024-12-26 13:43:04">2024-12-26</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2025 By MugaiAshe</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><div class="js-pjax"><script>(() => {
+  const loadMathjax = () => {
+    if (!window.MathJax) {
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          tags: 'none',
+        },
+        chtml: {
+          scale: 1.1
+        },
+        options: {
+          enableMenu: true,
+          renderActions: {
+            findScript: [10, doc => {
+              for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+                const display = !!node.type.match(/; *mode=display/)
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+                const text = document.createTextNode('')
+                node.parentNode.replaceChild(text, node)
+                math.start = {node: text, delim: '', n: 0}
+                math.end = {node: text, delim: '', n: 0}
+                doc.math.push(math)
+              }
+            }, '']
+          }
+        }
+      }
+      
+      const script = document.createElement('script')
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+      script.id = 'MathJax-script'
+      script.async = true
+      document.head.appendChild(script)
+    } else {
+      MathJax.startup.document.state(0)
+      MathJax.texReset()
+      MathJax.typesetPromise()
+    }
+  }
+
+  btf.addGlobalFn('encrypt', loadMathjax, 'mathjax')
+  window.pjax ? loadMathjax() : window.addEventListener('load', loadMathjax)
+})()</script></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="true"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="true"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><script data-pjax src="https://unpkg.com/oh-my-live2d"></script><script>const oml2d = OML2D.loadOml2d({dockedPosition:"left",mobileDisplay:false,models:[{"path":"/live2d_models/lizhi/lizhi.model3.json","position":[-30,-10],"scale":0.16,"stageStyle":{"width":500,"height":500},"mobilePosition":[0,0],"mobileScale":0.08,"mobileStageStyle":{"width":180,"height":166},"motionPreloadStrategy":"ALL"}],parentElement:document.body,primaryColor:"var(--btn-bg)",sayHello:false,tips:{style: {"width":230,"height":120,"left":"calc(50% - 20px)","top":"-100px"},mobileStyle: {"width":180,"height":80,"left":"calc(50% - 30px)","top":"-100px"},idleTips:{interval:3600,message:["你好呀，我是木盖~","欢迎来到我的小站~"]}}});</script><!-- hexo injector body_end end --></body></html>
