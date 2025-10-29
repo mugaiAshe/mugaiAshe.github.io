@@ -1,0 +1,750 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>大模型自学笔记（待更新中） | MugaiAshe's Blog</title><meta name="author" content="MugaiAshe"><meta name="copyright" content="MugaiAshe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="ffffff"><meta name="description" content="快速学习深度学习和大模型领域的基础理论知识，针对框架进行理解。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="大模型自学笔记（待更新中）">
+<meta property="og:url" content="https://mugaiashe.github.io/posts/81c7eb00.html">
+<meta property="og:site_name" content="MugaiAshe&#39;s Blog">
+<meta property="og:description" content="快速学习深度学习和大模型领域的基础理论知识，针对框架进行理解。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://mugaiashe.github.io/img/deeplearning/network.png">
+<meta property="article:published_time" content="2025-10-14T11:03:21.000Z">
+<meta property="article:modified_time" content="2025-10-29T13:59:46.650Z">
+<meta property="article:author" content="MugaiAshe">
+<meta property="article:tag" content="deeplearning">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://mugaiashe.github.io/img/deeplearning/network.png"><link rel="shortcut icon" href="/img/lz.png"><link rel="canonical" href="https://mugaiashe.github.io/posts/81c7eb00.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css"><script>
+    (() => {
+      
+    const saveToLocal = {
+      set: (key, value, ttl) => {
+        if (!ttl) return
+        const expiry = Date.now() + ttl * 86400000
+        localStorage.setItem(key, JSON.stringify({ value, expiry }))
+      },
+      get: key => {
+        const itemStr = localStorage.getItem(key)
+        if (!itemStr) return undefined
+        const { value, expiry } = JSON.parse(itemStr)
+        if (Date.now() > expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return value
+      }
+    }
+
+    window.btf = {
+      saveToLocal,
+      getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        Object.entries(attr).forEach(([key, val]) => script.setAttribute(key, val))
+        script.onload = script.onreadystatechange = () => {
+          if (!script.readyState || /loaded|complete/.test(script.readyState)) resolve()
+        }
+        script.onerror = reject
+        document.head.appendChild(script)
+      }),
+      getCSS: (url, id) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onload = link.onreadystatechange = () => {
+          if (!link.readyState || /loaded|complete/.test(link.readyState)) resolve()
+        }
+        link.onerror = reject
+        document.head.appendChild(link)
+      }),
+      addGlobalFn: (key, fn, name = false, parent = window) => {
+        if (!false && key.startsWith('pjax')) return
+        const globalFn = parent.globalFn || {}
+        globalFn[key] = globalFn[key] || {}
+        if (name && globalFn[key][name]) return
+        globalFn[key][name || Object.keys(globalFn[key]).length] = fn
+        parent.globalFn = globalFn
+      }
+    }
+  
+      
+      const activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      const activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', 'ffffff')
+        }
+      }
+
+      btf.activateDarkMode = activateDarkMode
+      btf.activateLightMode = activateLightMode
+
+      const theme = saveToLocal.get('theme')
+    
+          theme === 'dark' ? activateDarkMode() : theme === 'light' ? activateLightMode() : null
+        
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        document.documentElement.classList.toggle('hide-aside', asideStatus === 'hide')
+      }
+    
+      
+    const detectApple = () => {
+      if (/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)) {
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+  
+    })()
+  </script><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false,"highlightFullpage":false,"highlightMacStyle":false},
+  copy: {
+    success: '复制成功',
+    error: '复制失败',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":150,"languages":{"author":"作者: MugaiAshe","link":"链接: ","source":"来源: MugaiAshe's Blog","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'medium_zoom',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: true,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '大模型自学笔记（待更新中）',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-10-29 21:59:46'
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body><div id="loading-box"><div class="loading-left-bg"></div><div class="loading-right-bg"></div><div class="spinner-box"><div class="configure-border-1"><div class="configure-core"></div></div><div class="configure-border-2"><div class="configure-core"></div></div><div class="loading-word">加载中...</div></div></div><script>(()=>{
+  const $loadingBox = document.getElementById('loading-box')
+  const $body = document.body
+  const preloader = {
+    endLoading: () => {
+      $body.style.overflow = ''
+      $loadingBox.classList.add('loaded')
+    },
+    initLoading: () => {
+      $body.style.overflow = 'hidden'
+      $loadingBox.classList.remove('loaded')
+    }
+  }
+
+  preloader.initLoading()
+  window.addEventListener('load', preloader.endLoading)
+
+  if (false) {
+    btf.addGlobalFn('pjaxSend', preloader.initLoading, 'preloader_init')
+    btf.addGlobalFn('pjaxComplete', preloader.endLoading, 'preloader_end')
+  }
+})()</script><div id="web_bg" style="background: lightblue;"></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img text-center"><img src="/img/24-2.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data text-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">12</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url(/img/deeplearning/network.png);"><nav id="nav"><span id="blog-info"><a class="nav-site-title" href="/"><img class="site-icon" src="/img/lz.png" alt="Logo"><span class="site-name">MugaiAshe's Blog</span></a><a class="nav-page-title" href="/"><span class="site-name">大模型自学笔记（待更新中）</span></a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 归档</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fas fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><span class="site-page"><i class="fas fa-bars fa-fw"></i></span></div></div></nav><div id="post-info"><h1 class="post-title">大模型自学笔记（待更新中）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2025-10-14T11:03:21.000Z" title="发表于 2025-10-14 19:03:21">2025-10-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2025-10-29T13:59:46.650Z" title="更新于 2025-10-29 21:59:46">2025-10-29</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/deeplearning/">deeplearning</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">总字数:</span><span class="word-count">16.4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>51分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title=""><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">浏览量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h2 id="1-NLP基础知识"><a href="#1-NLP基础知识" class="headerlink" title="1.NLP基础知识"></a>1.NLP基础知识</h2><h3 id="1-1-文本处理基础"><a href="#1-1-文本处理基础" class="headerlink" title="1.1 文本处理基础"></a>1.1 文本处理基础</h3><h4 id="Tokenizer：分词器"><a href="#Tokenizer：分词器" class="headerlink" title="Tokenizer：分词器"></a>Tokenizer：分词器</h4><p>Tokenizer是一个用于向量化文本，将文本转换为序列的类。当前tokenization主要分为：word，sub-word， charlevel 三个类型。Subword处于word和char level两个粒度级别之间。</p>
+<p>word级别面临问题：</p>
+<ol>
+<li>超大的vocabulary size, 比如中文的常用词可以达到20W个</li>
+<li>通常面临比较严重的OOV问题（Out-Of-Vocabulary：测试集中出现的词汇未在训练集中出现，导致模型无法识别或处理这些词汇）</li>
+<li>vocabulary 中存在很多相似的词。</li>
+</ol>
+<p>以及char level存在的以下问题：</p>
+<ol>
+<li>文本序列会变得很长，想象以下如果是一篇英文文章的分类，char level级别的输入长度可以达到上万</li>
+<li>无法对语义进行比较好的表征</li>
+</ol>
+<p>subword 不会对高频的词进行拆分，仅拆分一些低频的词，比如”boy”和”boys”这两个词，将”boys”拆分为”boy”和”s”两个更高频的词，其中”boy”表示的是词根，模型通过”boy”去学习”boys”的语义。</p>
+<h5 id="BPE：Byte-Pair-Encoding（Subword）"><a href="#BPE：Byte-Pair-Encoding（Subword）" class="headerlink" title="BPE：Byte Pair Encoding（Subword）"></a>BPE：Byte Pair Encoding（Subword）</h5><p>学习教程：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/424631681">理解NLP最重要的编码方式 — Byte Pair Encoding (BPE)，这一篇就够了 - 知乎</a></p>
+<p>是一种简单的数据压缩算法。BPE每一步都将最常见的一对相邻数据单位替换为该数据中没有出现过的一个新单位，反复迭代直到满足停止条件。</p>
+<p>举例：</p>
+<p>假设有需要编码（压缩）的数据 aaabdaaabac。相邻字节对（相邻数据单位在BPE中看作相邻字节对） aa 最常出现，因此我们将用一个新字节 Z 替换它。我们现在有了 ZabdZabac，其中 Z &#x3D; aa。下一个常见的字节对是 ab，让我们用 Y 替换它。我们现在有 ZYdZYac，其中 Z &#x3D; aa ，Y &#x3D; ab。剩下的唯一字节对是 ac，它只有一个，所以我们不对它进行编码。我们可以递归地使用字节对编码将 ZY 编码为 X。我们的数据现在已转换为 XdXac，其中 X &#x3D; ZY，Y &#x3D; ab，Z &#x3D; aa。它不能被进一步压缩，因为没有出现多次的字节对。那如何把压缩的编码复原呢？反向执行以上过程就行了。</p>
+<p>BPE 在迭代的时候（会受到单词末尾标记“&lt;&#x2F;w&gt;”的影响）通过比较token的频率大小来穷尽每一种可能，所以是一种贪心算法。在实际中，token计数先增加然后减少。</p>
+<p>示例在只有一个单词包含最高频率字符时停止迭代。算法的停止标准可以是token的计数或固定的迭代次数。我们选择一个最合适的停止标准，以便我们的数据集可以以最有效的方式分解为token。</p>
+<p>存在问题：一个词可能存在多种拆分方式，难以评估使用那个拆分方式比较合理，可以组合的列表中的优先级无法确定，通常会直接取第一个。</p>
+<h5 id="WordPiece（Subword）"><a href="#WordPiece（Subword）" class="headerlink" title="WordPiece（Subword）"></a>WordPiece（Subword）</h5><p>学习教程：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/445686202">理解tokenizer之WordPiece: Subword-based tokenization algorithm - 知乎</a></p>
+<p>与BPE没有太大的区别。WordPiece选择让似然概率最大的值。具体的计算使用合并后的概率值，除以合并前的概率值，举个例子, 在考虑将”e”和”s”合并的时候除了会考虑”es”的概率值，还会考虑”e”和”s”的概率值。或者说，”es”的合并是通过考虑合并带来的价值。</p>
+<p>每次选取两个token组合的时候，都需要测试所有的可能性并且计算句子的困惑度，所以时间复杂度是${O({K}^{2})}$，其中K表示的当前词表的大小。但是在原论文中有些简单的小技巧可以加速计算，比如一次组合多个词，一次性算困惑度等</p>
+<h5 id="SentencePiece"><a href="#SentencePiece" class="headerlink" title="SentencePiece"></a>SentencePiece</h5><p>学习教程：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/630696264">大模型词表扩充必备工具SentencePiece - 知乎</a></p>
+<p>是谷歌推出的子词开源工具包，把一个<strong>句子</strong>看作一个<strong>整体</strong>，再拆成片段，而没有保留天然的词语的概念。一般地，它把<strong>空格</strong>也当作一种特殊<strong>字符</strong>来处理，再用BPE或者Unigram算法来构造词汇表。SentencePiece除了集成了BPE、ULM子词算法之外，SentencePiece还能支持字符和词级别的分词。</p>
+<h5 id="Unigram"><a href="#Unigram" class="headerlink" title="Unigram"></a>Unigram</h5><p>一个大的不同是，BPE 以及 WordPiece都是初始化一个小词表，然后一个个增加到限定的词汇量，而 Unigram Language Model 却是<strong>先初始一个大词表</strong>，接着通过语言模型评估不断减少词表，直到限定词汇量。</p>
+<h5 id="BBPE"><a href="#BBPE" class="headerlink" title="BBPE"></a>BBPE</h5><p>BBPE核心思想将BPE的从字符级别扩展到子节（Byte）级别。BPE的一个问题是如果遇到了unicode编码，基本字符集可能会很大。BBPE以<strong>一个字节</strong>为一种“字符”，不管实际字符集用了几个字节来表示一个字符。这样的话，基础字符集的大小就锁定在了256（2^8）。采用BBPE的好处是可以跨语言共用词表，显著压缩词表的大小。而坏处就是，对于类似中文这样的语言，一段文字的序列长度会显著增长。因此，BBPE可能比BPE 表现的更好。然而，BBPE sequence比起BPE来说略长，这也导致了更长的训练&#x2F;推理时间。BBPE其实与BPE在实现上并无大的不同，只不过基础词表使用256的字节集。</p>
+<h4 id="Embedding：嵌入层"><a href="#Embedding：嵌入层" class="headerlink" title="Embedding：嵌入层"></a>Embedding：嵌入层</h4><p>有一系列样本(x,y)，x 是词语，y 是它们的词性，要构建 f(x)-&gt;y 的映射，而f又只接受数值型输入，因此需要将文本转换为数值。</p>
+<p>Embedding层就是用来降维的，原理是<strong>矩阵乘法</strong>，也可以升维。</p>
+<p>距离的远近会影响我们的观察效果，对低维的数据进行升维时，可能把一些其他特征给放大了，或者把笼统的特征给分开了。同时，这个Embedding是一直在学习在优化的，就使得整个拉近拉远的过程慢慢形成一个良好的观察点。</p>
+<h5 id="One-hot：独热表示"><a href="#One-hot：独热表示" class="headerlink" title="One-hot：独热表示"></a>One-hot：独热表示</h5><p>学习教程：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/164502624">一文读懂Embedding的概念，以及它和深度学习的关系 - 知乎</a></p>
+<p>把每一个字都对应成一个n个（样本总数&#x2F;字总数）元素的数组&#x2F;列表，其中每一个字都用唯一对应的数组&#x2F;列表对应，数组&#x2F;列表的唯一性用1表示。计算简单，但过于稀疏，过度占用资源。</p>
+<h5 id="Word2Vec"><a href="#Word2Vec" class="headerlink" title="Word2Vec"></a>Word2Vec</h5><p>学习教程：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/114538417">深入浅出Word2Vec原理解析 - 知乎</a>、<a target="_blank" rel="noopener" href="https://blog.csdn.net/v_JULY_v/article/details/102708459">如何通俗理解Word2Vec (23年修订版)-CSDN博客</a></p>
+<p>需要解决两个问题：1 需要赋予词语义信息，2 降低维度</p>
+<p>Word2Vec是轻量级的神经网络，其模型仅仅包括输入层、隐藏层和输出层。模型框架根据输入输出的不同，主要包括CBOW和Skip-gram模型。 CBOW的方式是在知道词的上下文的情况下预测当前词。而Skip-gram是在知道了词的情况下，对词的上下文进行预测。</p>
+<p>词向量矩阵C作为训练参数之一。Word2Vec的最终目的不是为了得到一个语言模型，也不是要把f训练得多么完美，而是只关心模型训练完后的副产物：模型参数(这里特指神经网络的权重)，并将这些参数作为输入x向量化的表示，这个向量便叫做——词向量。</p>
+<h5 id="FastText"><a href="#FastText" class="headerlink" title="FastText"></a>FastText</h5><p>学习教程：<a target="_blank" rel="noopener" href="https://blog.csdn.net/feilong_csdn/article/details/88655927">fastText原理和文本分类实战，看这一篇就够了-CSDN博客</a>、<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/32965521">fastText原理及实践 - 知乎</a></p>
+<p>fastText模型架构和word2vec中的CBOW很相似，不同之处是fastText预测标签而CBOW预测的是中间词，即模型架构类似但是模型的任务不同。</p>
+<p>n-gram是基于语言模型的算法，基本思想是将文本内容按照子节顺序进行大小为N的窗口滑动操作，最终形成窗口为N的字节片段序列。</p>
+<p>在传统的word2vec中，这种单词内部形态信息因为它们被转换成不同的id丢失了。fastText使用了字符级别的n-grams来表示一个单词。对于单词“apple”，假设n的取值为3，则它的trigram有“&lt;ap”, “app”, “ppl”, “ple”, “le&gt;”，其中，&lt;表示前缀，&gt;表示后缀。可以用这些trigram来表示“apple”这个单词，可以用这5个trigram的向量叠加来表示“apple”的词向量。</p>
+<h5 id="GloVe"><a href="#GloVe" class="headerlink" title="GloVe"></a>GloVe</h5><p>学习教程：<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44649780/article/details/127365081">NLP | GloVe(带有全局向量的词嵌入) 图文详解及代码_glove词嵌入-CSDN博客</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/79573970">四步理解GloVe！(附代码实现) - 知乎</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/42073620">（十五）通俗易懂理解——Glove算法原理 - 知乎</a></p>
+<p>Global Vectors for Word Representation，是一种无监督学习算法，是Word2Vec模型的扩展。利用全局统计信息。</p>
+<p>构建一个共现矩阵（Co-ocurrence Matrix）X，矩阵中的每一个元素 Xij 代表单词 i 和上下文单词 j 在特定大小的上下文窗口（context window）内共同出现的次数。根据两个单词在上下文窗口的距离 d，提出了一个衰减函数（decreasing weighting）：decay&#x3D;1&#x2F;d 用于计算权重，也就是说<strong>距离越远的两个单词所占总计数（total count）的权重越小</strong>。</p>
+<p>构建F函数：
+
+
+$$
+F\left ( {w}_{i},{w}_{j},{w}_{k}\right )=\frac{{P}_{ik}}{{P}_{jk}}
+$$
+
+
+意思是通过在共现矩阵中的概率关系来表示词出现的相关性，其与词语的词向量表示应当有相关性。</p>
+<p>SVD（奇异值分解）可以得到语义、句法、语义信息。</p>
+<h3 id="1-2-核心架构组件"><a href="#1-2-核心架构组件" class="headerlink" title="1.2 核心架构组件"></a>1.2 核心架构组件</h3><h4 id="注意力机制"><a href="#注意力机制" class="headerlink" title="注意力机制"></a>注意力机制</h4><p>（1）生成Q、K、V向量：对于输入序列中的每个单词，都会生成对应的Query（查询）、Key（键）和Value（值）三种向量，对应三个可训练参数矩阵。</p>
+<p>（2）计算Q、K的点积（注意力分数）：计算Query向量与序列中所有单词的Key向量之间的点积，得到一个分数。这个分数反映了每个单词与当前位置单词的关联程度。</p>
+<p>（3）Softmax函数归一化（注意力权重）：这些分数会经过一个Softmax函数进行归一化，得到每个单词的注意力权重。这些权重表示了在理解当前单词时，应该给予序列中其他单词多大的关注。</p>
+<p>（4）注意力权重加权求和（加权和向量）：这些注意力权重与对应的Value向量进行加权求和，得到一个加权和向量。这个加权和向量会被用作当前单词的新表示，包含了更丰富的上下文信息。</p>
+<p><strong>硬注意力</strong>是0&#x2F;1问题，某个区域要么被关注，要么不关注，不可微。硬注意力更加关注点，也就是图像中的每个点都可能延伸出注意力。</p>
+<p><strong>软注意力</strong>是[0,1]间连续分布问题，用0到1的不同分值表示每个区域被关注的程度高低。软注意力更加关注区域或者通道，软注意力是确定性的注意力，学习完成后可以直接通过网络生成，是可微的。</p>
+<p>学习教程：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/631398525">注意力机制综述（图解完整版附代码） - 知乎</a></p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/star_nwe/article/details/143590176">一文彻底搞懂深度学习：注意力机制（Attention Mechanism）-CSDN博客</a></p>
+<h5 id="Self-Attention自注意力"><a href="#Self-Attention自注意力" class="headerlink" title="Self-Attention自注意力"></a>Self-Attention自注意力</h5><p>在处理序列数据时，每个元素都可以与序列中的其他元素建立关联，而不仅仅是依赖于相邻位置的元素。它通过计算元素之间的相对重要性来自适应地捕捉元素之间的长程依赖关系。</p>
+<p>自注意力机制通过计算序列中不同位置之间的相关性（q、k操作），为每个位置分配一个权重，然后对序列进行加权求和（v操作）。</p>
+<p>让一个序列自己内部的元素相互关注。自己乘以自己。</p>
+<h5 id="Cross-Attention交叉注意力"><a href="#Cross-Attention交叉注意力" class="headerlink" title="Cross-Attention交叉注意力"></a>Cross-Attention交叉注意力</h5><p>Cross Attention 是让<strong>两个不同的序列</strong>（或者数据来源）之间建立关注关系。Q 和 K&#x2F;V 的来源不同。</p>
+<h5 id="Multi-Head-Attention多头注意力"><a href="#Multi-Head-Attention多头注意力" class="headerlink" title="Multi-Head Attention多头注意力"></a>Multi-Head Attention多头注意力</h5><p>在自注意力机制中，每个单词或者字都仅仅只有一个q、k、v与其对应。</p>
+<p>在多头注意力机制中，q、k、v矩阵有多个。a先乘q矩阵，其次，会为其多分配两个head，k、v同理。点乘时根据下标对齐。这些输出随后被合并（通常是通过拼接或平均）以形成一个最终的、更复杂的表示。</p>
+<h5 id="Mask-Attention"><a href="#Mask-Attention" class="headerlink" title="Mask-Attention"></a>Mask-Attention</h5><p>学习教程：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/1915078607602180894">Attention Mask详解 - 知乎</a></p>
+<p>注意力掩码(Attention mask)告诉模型在计算注意力权重时，应该忽略哪些输入部分的干扰（“屏蔽”掉它们）。在自回归生成任务中（例如文本生成、机器翻译解码），模型需要根据过去的信息预测下一个token。在训练或推理时，模型只允许访问当前位置之前（左） 的token（历史信息），而不能访问当前位置之后（右） 的token（未来信息）。这样做的目的是防止信息泄露。</p>
+<h4 id="位置编码"><a href="#位置编码" class="headerlink" title="位置编码"></a>位置编码</h4><p>学习教程：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/454482273">Transformer学习笔记一：Positional Encoding（位置编码） - 知乎</a>、<a target="_blank" rel="noopener" href="https://www.cnblogs.com/JCpeng/p/19048756">常用位置编码技术对比分析 - Jcpeng_std - 博客园</a></p>
+<p>在transformer的encoder和decoder的输入层中使用，输入&#x3D;输入嵌入编码+位置编码（两种编码维度相同）</p>
+<h5 id="绝对位置编码"><a href="#绝对位置编码" class="headerlink" title="绝对位置编码"></a>绝对位置编码</h5><p>transformer原始论文中提出，偶数用sin，奇数用cos。</p>
+<p><img src="/img/deeplearn/PE.png"></p>
+<p>满足：</p>
+<p>性质一：两个位置编码的点积(dot product)仅取决于偏移量，也即两个位置编码的点积可以反应出两个位置编码间的距离。</p>
+<p>性质二：位置编码的点积是无向的。输入与其往前第t个输入的位置编码点积&#x3D;输入与其往后第t个输入的位置编码点积</p>
+<h5 id="可学习的位置编码"><a href="#可学习的位置编码" class="headerlink" title="可学习的位置编码"></a>可学习的位置编码</h5><p>将一个可训练的矩阵作为位置编码，随模型一起训练。模型只能处理训练时见过的最大长度的序列，完全没有外推能力。</p>
+<h5 id="相对位置编码"><a href="#相对位置编码" class="headerlink" title="相对位置编码"></a>相对位置编码</h5><p>关注序列中任意两个 token 之间的相对距离。不再将位置编码加到词向量上，而是修改了注意力分数的计算过程，在 <code>Softmax</code> 之前注入一个与相对位置 <code>(i-j)</code> 相关的偏置项。</p>
+<h5 id="ROPE：旋转位置编码"><a href="#ROPE：旋转位置编码" class="headerlink" title="ROPE：旋转位置编码"></a>ROPE：旋转位置编码</h5><p>近年来最成功、应用最广泛的位置编码方案。</p>
+<p>通过旋转矩阵对查询（Q）和键（K）向量在二维子空间上进行旋转，旋转的角度取决于其绝对位置。变换后，两个向量在注意力机制中的点积 <code>(Q_m)^T K_n</code> **结果只会依赖于相对位置 (m-n)**。这就同时拥有了绝对位置的形式和相对位置的内核。</p>
+<ul>
+<li>也有研究尝试让模型<strong>完全不依赖位置编码</strong>（如 Attention with Linear Biases - ALiBi），通过在注意力分数上添加一个与距离成比例的负偏置来惩罚远距离的 token。它在长文本外推上表现非常出色，但目前在通用性能上仍被认为略逊于 RoPE。</li>
+</ul>
+<h4 id="归一化技术"><a href="#归一化技术" class="headerlink" title="归一化技术"></a>归一化技术</h4><h5 id="BatchNorm"><a href="#BatchNorm" class="headerlink" title="BatchNorm"></a>BatchNorm</h5><p>使用均值和方差将每个元素标准化</p>
+<h5 id="Layer-Norm"><a href="#Layer-Norm" class="headerlink" title="Layer Norm"></a>Layer Norm</h5><p>学习教程：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/492803886">Transformer中的归一化(五)：Layer Norm的原理和实现</a></p>
+<p>BN是对batch的维度去做归一化，也就是针对不同样本的同一特征做操作。LN是对hidden的维度去做归一化，也就是针对单个样本的不同特征做操作。因此LN可以不受样本数的限制。BN就是在每个维度上统计所有样本的值，计算均值和方差；LN就是在每个样本上统计所有维度的值，计算均值和方差。BN在每个维度上分布是稳定的，LN在每个样本上的分布是稳定的。</p>
+<h5 id="RMSNorm"><a href="#RMSNorm" class="headerlink" title="RMSNorm"></a>RMSNorm</h5><p>学习教程：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/669463978">LLM中的RMSNorm - 知乎</a>、<a target="_blank" rel="noopener" href="https://blog.csdn.net/DuLNode/article/details/150760491">大模型面试题剖析:Pre-Norm与Post-Norm的对比</a></p>
+<p>Pre Norm，去除了减去均值的操作，也就是没有去中心化的操作，只有缩放的操作。RMSnorm就是均值为0的layer norm，可以提升运行效率。</p>
+<p>Post Norm（transformer原始论文）： 归一化操作在残差连接之后。残差相加后进行归一化，对参数正则化效果强，但可能导致梯度消失。训练不稳定，需warmup；深层模型（&gt;18层）易失败,但可以通过warmup和模型初始化缓解；参数正则化强，鲁棒性较好。</p>
+<p>Pre Norm（改进版）：归一化操作在残差连接之前。先对输入归一化，再送入模块计算，最后与原始输入相加，缓解梯度问题。梯度流动更稳定，无需复杂预热机制；支持更深层模型，训练收敛性更好；表征坍塌风险，但可通过双残差连接缓解；计算量稍高。</p>
+<p>当代大模型选择Pre-Norm。</p>
+<h5 id="DeepNorm"><a href="#DeepNorm" class="headerlink" title="DeepNorm"></a>DeepNorm</h5><p>学习教程：<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/657659526">PreNorm&#x2F;PostNorm&#x2F;DeepNorm&#x2F;RMSNorm是什么 - 知乎</a></p>
+<p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/480783670">【DL&amp;NLP】再谈Layer-Norm：Pre-LN、Post-LN、DeepNorm - 知乎</a></p>
+<p>在进行layer-norm之前扩大残差连接，让输入乘以一个大于1的常数。</p>
+<p>结合了Post-LN的稳定性和Pre-LN的性能，在极深模型（如千亿参数）中能有效稳定训练。其实就是基于PostNorm进行了优化，多偏袒底层的恒等分支。相较于Post-LN模型，DeepNet的模型更新几乎保持恒定。</p>
+<h4 id="残差连接"><a href="#残差连接" class="headerlink" title="残差连接"></a>残差连接</h4><p>一旦某一个导数很小，多次连乘后梯度可能越来越小，这就是梯度消散。改善了反向传播过程中的梯度消失问题，网络退化问题。</p>
+<h3 id="1-3-神经网络基础"><a href="#1-3-神经网络基础" class="headerlink" title="1.3 神经网络基础"></a>1.3 神经网络基础</h3><h4 id="MLP"><a href="#MLP" class="headerlink" title="MLP"></a>MLP</h4><p>学习教程：<a target="_blank" rel="noopener" href="https://blog.csdn.net/m0_73798143/article/details/136636647">小白笔记：对MLP多层感知机概念、结构、超参数的理解-CSDN博客</a></p>
+<p>Multi-Layer Perceptron 多层感知机</p>
+<p>PLA：Perceptron Learning Algorithm 感知机，只有输入和输出层，这两层共同组成了一个简单的神经元，即单个神经元模型。是一个线性的二分类器，不能有效分类非线性数据。可以加深这个神经元的网络层次，理论上来说，多层网络可以模拟任何复杂的函数。</p>
+<p>多层感知机由感知机推广而来，有多个神经元层，因此 MLP 也被称为人工神经网络（Artificial Neural Network，ANN）。MLP 是一种特定类型的ANN，它由多个神经元组成，通常包括一个输入层、一个或多个隐藏层以及一个输出层。MLP 则是 ANN 中的一个特例，指代具有多个层的前馈神经网络。在讨论上，MLP 和 ANN 可以互换使用。</p>
+<p>多层感知机这三类给定层（输入、中间、输出层）中的每个节点都会连接到相邻层中的每个节点（<strong>全连接</strong>），所以MLP中最重要的组成部分就是Dense Layer（全连接层 Fully Connected Layer、线性层、稠密层），又称为前馈神经网络(FeedforwardNeural Network，简称 FFN 或 FNN )。</p>
+<p>如何将线性结构变为多层的感知机：全连接（Dense） + 激活函数（引入非线性）。</p>
+<h5 id="超参数"><a href="#超参数" class="headerlink" title="超参数"></a>超参数</h5><p>隐藏层的数量：在实际应用中，隐藏层数量增加并不总是会带来更好的效果，因为这样也会增加模型复杂度，从而增加计算成本和过拟合风险，还会增加超参数搜索的复杂度。</p>
+<p>隐藏层的输出大小（或者说是隐藏层的神经元数量）：隐藏层的每个神经元都会产生一个输出，因此隐藏层的输出大小等于隐藏层中神经元的数量。较大的隐藏层输出大小可能会增加模型的表示能力，但也会增加过拟合的风险。</p>
+<p>激活函数、学习率、正则化参数、Batch Size、优化器</p>
+<h5 id="更新节点权重"><a href="#更新节点权重" class="headerlink" title="更新节点权重"></a>更新节点权重</h5><p>（1）前向传播（Forward Propagation）：首先，通过前向传播计算模型的输出。从输入层开始，逐层计算每个隐藏层和输出层的输出，直到得到模型的预测结果。</p>
+<p>（2）计算损失（Compute Loss）：计算模型在训练数据上的损失，通常使用某种损失函数来度量模型的预测值与真实值之间的差异。</p>
+<p>（3）反向传播误差（Backward Propagation of Error）：利用反向传播算法计算损失函数对模型参数的梯度。具体地，从输出层开始，逐层计算每个参数的梯度，然后将梯度沿着网络反向传播，直到计算出输入层的参数梯度。</p>
+<p>（4）更新参数（Update Parameters）：最后，根据计算得到的梯度，使用梯度下降或其他优化算法来更新模型的参数（即节点权重）。通常情况下，参数更新的步长由学习率控制。</p>
+<h5 id="Transformer中前馈神经网络的结构设计"><a href="#Transformer中前馈神经网络的结构设计" class="headerlink" title="Transformer中前馈神经网络的结构设计"></a>Transformer中前馈神经网络的结构设计</h5><p>在Transformer模型中，位置感知前馈网络（FFN层）通常出现在编码器（Encoder）和解码器（Decoder）的注意力层之后。</p>
+<h5 id="不同维度投影的作用"><a href="#不同维度投影的作用" class="headerlink" title="不同维度投影的作用"></a>不同维度投影的作用</h5><p>升维线性变换（使模型能够挖掘出更复杂的特征关系）——非线性激活函数（引入非线性因素）——降维线性变换（除冗余信息，浓缩特征，保持输入输出的一致性）</p>
+<ul>
+<li><p>字节面试提问：为什么大模型的世界知识存储在这一部分?</p>
+<p>自注意力是“上下文感知”的：它的计算高度依赖于当前的输入序列，作用是动态地、根据上下文来整合信息。</p>
+<p>MLP是“位置独立”的知识处理器：MLP对每个词元的处理是独立的，不考虑序列位置。它接收自注意力层输出的、已经融合了上下文信息的向量，然后对其进行一个固定的非线性变换。这个变换本质上是将输入向量“映射”到模型在训练中学到的某个知识或概念上。是一个通用的函数逼近器，适合学习输入特征之间的复杂关联。</p>
+</li>
+</ul>
+<h4 id="激活函数"><a href="#激活函数" class="headerlink" title="激活函数"></a>激活函数</h4><h5 id="sigmoid"><a href="#sigmoid" class="headerlink" title="sigmoid"></a>sigmoid</h5><p>$$<br>\sigma \left ( x\right )&#x3D;\frac{1}{1+{e}^{-x}}<br>$$</p>
+<p><img src="D:/Blog/source/_posts/img/deeplearning/sigmoid.png"></p>
+<p>非负，绝对值大时<strong>饱和</strong>，值域(0,1)。适合用于分类器，现在已经不常用，梯度消失避免使用。</p>
+<h5 id="Tanh函数"><a href="#Tanh函数" class="headerlink" title="Tanh函数"></a>Tanh函数</h5><p>双曲正切函数，函数定义为<br>$$<br>f(x)&#x3D;tanh(x)&#x3D;\frac{e^{x}-e^{-x}}{e^{x}+e^{-x}}<br>$$<br>值域为 (-1,1) ，形状和sigmoid差不多。比sigmoid好一点，但仍远不如ReLU，梯度消失避免使用。</p>
+<h5 id="ReLU"><a href="#ReLU" class="headerlink" title="ReLU"></a>ReLU</h5><p>f(x)&#x3D;max(0,x)</p>
+<p>具有更强的非线性拟合能力：没有梯度消失；能够最大化的发挥神经元的筛选能力。目前为止是默认的最好的非线性激活函数，只能在隐藏层中使用。</p>
+<h6 id="GELU"><a href="#GELU" class="headerlink" title="GELU"></a>GELU</h6><p>高斯误差线性单元激活函数。解决ReLU问题：不光滑，0点不可导。公式很复杂。</p>
+<p><img src="/img/deeplearn/gelu.png"></p>
+<h6 id="softmax"><a href="#softmax" class="headerlink" title="softmax"></a>softmax</h6><p>$$<br>\zeta \left ( x\right )&#x3D;log\left ( 1+{e}^{x}\right )<br>$$</p>
+<p><img src="/img/deeplearning/softmax.png"></p>
+<p>软化的max(0,x)函数，非负。</p>
+<h5 id="SwiGLU"><a href="#SwiGLU" class="headerlink" title="SwiGLU"></a>SwiGLU</h5><p>学习教程：<a target="_blank" rel="noopener" href="https://blog.csdn.net/u012856866/article/details/146611958">【大模型】激活函数之SwiGLU详解-CSDN博客</a></p>
+<p>主流LLM采用。</p>
+<h6 id="Swish函数"><a href="#Swish函数" class="headerlink" title="Swish函数"></a>Swish函数</h6><p>无上界有下界、平滑、非单调。<br>$$<br>Swish_{\beta}\left ( x\right )&#x3D;x \sigma \left (\beta x\right )<br>$$<br>${\sigma}$是sigmoid函数，β是一个可学习的参数。</p>
+<ul>
+<li><p>当β趋近于0时，Swish函数趋近于线性函数 y &#x3D; x&#x2F;2</p>
+</li>
+<li><p>当β取值为1时，Swish函数是光滑且非单调的，等价于SiLU激活函数。通常取β&#x3D;1。</p>
+</li>
+<li><p>当β趋近于无穷大时，Swish函数趋近于ReLU函数</p>
+</li>
+</ul>
+<h6 id="GLU-Gated-Linear-Unit"><a href="#GLU-Gated-Linear-Unit" class="headerlink" title="GLU (Gated Linear Unit)"></a>GLU (Gated Linear Unit)</h6><p>是一种神经网络层，是一个线性变换后面接门控机制（sigmoid函数）的结构。</p>
+<p>SwiGLU激活结合了Swish和GLU的特点，提供了一种有效的激活机制。</p>
+<ul>
+<li>非线性能力：Swish激活函数引入非线性。</li>
+<li>门控特性：GLU的门控机制允许模型动态地调整信息流，使得模型在处理长序列数据时能够更好地捕捉长距离依赖关系 。</li>
+<li>梯度稳定性：SwiGLU在负输入区域提供非零的梯度，有助于缓解梯度消失问题，从而提高模型的训练稳定性 。</li>
+<li>可学习参数：SwiGLU的参数可以通过训练学习，使得模型可以根据不同任务和数据集动态调整，增强了模型的灵活性和适应性 。</li>
+<li>计算效率：SwiGLU在保持性能的同时，具有较高的计算效率。</li>
+</ul>
+<h5 id="激活函数选择的考虑因素"><a href="#激活函数选择的考虑因素" class="headerlink" title="激活函数选择的考虑因素"></a>激活函数选择的考虑因素</h5><p>学习教程：<a target="_blank" rel="noopener" href="https://cp.baidu.com/landing/tscp_doc/ea1d03236074f0cba51598077202697a">设计激活函数需要考虑的因素</a></p>
+<p><strong>1. 非线性</strong></p>
+<ul>
+<li><strong>重要性</strong>：非线性是激活函数的核心特性之一，它允许网络学习复杂的模式和数据表示。</li>
+<li><strong>考虑点</strong>：确保具有足够的非线性，同时避免过于复杂以至于难以优化。</li>
+</ul>
+<p><strong>2. 可微性</strong></p>
+<ul>
+<li><strong>重要性</strong>：大多数现代神经网络使用基于梯度的优化算法（如反向传播），激活函数需要是可微的（至少是分段可微的）。</li>
+<li><strong>考虑点</strong>：激活函数应在所有定义域内都可导，或至少在关键点上具有合理的导数行为。</li>
+</ul>
+<p><strong>3. 输出范围</strong></p>
+<ul>
+<li><strong>重要性</strong>：激活函数的输出范围影响网络的稳定性和训练效率。例如，饱和的输出值可能导致梯度消失或爆炸问题。</li>
+<li><strong>考虑点</strong>：选择一个输出范围适中、不易导致数值不稳定的激活函数。例如，Sigmoid和Tanh函数易于饱和，而ReLU及其变体则通常具有更宽的活跃区域。</li>
+</ul>
+<p><strong>4. 梯度特性</strong></p>
+<ul>
+<li><strong>重要性</strong>：良好的梯度传递是防止梯度消失或爆炸的关键。这直接关系到模型能否有效学习和收敛速度。</li>
+<li><strong>考虑点</strong>：分析激活函数在不同输入值下的梯度表现，确保其能在大部分情况下提供有效的梯度信号。ReLU函数通过单侧抑制解决了部分梯度消失问题，但也可能引发“死亡神经元”现象。</li>
+</ul>
+<p><strong>5. 计算复杂度</strong></p>
+<ul>
+<li><strong>重要性</strong>：高效的计算对于大规模网络和实时应用至关重要。</li>
+<li><strong>考虑点</strong>：选择计算简单、资源消耗低的激活函数。例如，ReLU比Sigmoid和Tanh计算更快且更易实现。</li>
+</ul>
+<p><strong>6. 参数化与非参数化</strong></p>
+<ul>
+<li><strong>重要性</strong>：一些激活函数可能包含可调参数，这些参数可以通过训练过程进行优化。</li>
+<li><strong>考虑点</strong>：评估是否需要参数化的激活函数以增加模型的灵活性，同时也要注意引入额外参数的潜在风险和复杂性。</li>
+</ul>
+<p><strong>7. 鲁棒性与稳定性</strong></p>
+<ul>
+<li><strong>重要性</strong>：面对不同规模和类型的数据集，激活函数应表现出一定的鲁棒性和稳定性。</li>
+<li><strong>考虑点</strong>：测试激活函数在各种条件下的表现，包括极端输入值、噪声数据等，以确保其不会导致模型不稳定或训练失败。</li>
+</ul>
+<p><strong>8. 生物学启发与实际应用</strong></p>
+<ul>
+<li><strong>重要性</strong>：某些激活函数的设计受到了大脑神经元行为的启发。</li>
+<li><strong>考虑点</strong>：考虑激活函数是否与特定的应用场景或理论框架相契合，比如脉冲神经网络中的尖峰激活函数。</li>
+</ul>
+<h4 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h4><h5 id="交叉熵损失"><a href="#交叉熵损失" class="headerlink" title="交叉熵损失"></a>交叉熵损失</h5><p>主要用于分类任务。均方误差（MSE）主要用于回归任务。交叉熵假定输出是概率分布，</p>
+<ul>
+<li>MSE 假定误差符合高斯分布，适用于连续值的回归问题，而分类任务的输出（类别标签）是离散的</li>
+<li>交叉熵的梯度与误差成正比，有助于快速修正</li>
+<li>交叉熵对错误预测的惩罚是非线性的，尤其是对置信度过高的错误预测，MSE 的惩罚是二次型的，对所有误差的处理相对均匀。</li>
+</ul>
+<p>一个事件的自信息：<br>$$<br>I\left ( x\right )&#x3D;-logP\left ( x\right )<br>$$<br>香农熵（信息熵）：量化整个概率分布中不确定性总量。概率的对数（logP(x)）的均值。<br>$$<br>H\left ( x\right )&#x3D;-E_{x\sim P}\left [ logP\left ( x\right )\right ]<br>$$<br><img src="D:/Blog/source/_posts/img/deeplearning/信息熵.png"></p>
+<p>KL散度：衡量两个分布的差异。</p>
+<p>$$<br>D_{KL}\left ( P\parallel Q\right )&#x3D;E_{x\sim P}\left [ log\frac{P\left ( x\right )}{Q\left ( x\right )}\right ]<br>$$<br>交叉熵：<br>$$<br>H\left ( P,Q\right )&#x3D;-E_{x\sim P}\left [ logQ\left ( x\right )\right ]<br>$$</p>
+<p>$$<br>H\left ( P,Q\right )&#x3D;H\left ( P\right )+D_{KL}\left ( P\parallel Q\right )<br>$$</p>
+<p>针对Q最小化交叉熵&#x3D;&#x3D;最小化KL散度，因为Q不参与H(P)。</p>
+<p>代码实现：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn</span><br><span class="line"></span><br><span class="line">criterion = nn.CrossEntropyLoss()</span><br><span class="line">loss = criterion(logits, labels)</span><br></pre></td></tr></table></figure>
+
+<p>在大语言模型训练中的应用：</p>
+<ul>
+<li>概率输出的天然适配<br>大模型通常通过 softmax 或 sigmoid 输出概率分布，交叉熵直接作用于这些概率，优化目标明确且一致。MSE则需要将离散标签转化为连续值，引入不必要的复杂性。</li>
+<li>梯度动态的优势<br>交叉熵的梯度形式（经过 softmax 后）简单且高效，即使网络很深也能保持较好的梯度流。MSE 的梯度在概率值接近边界时趋于0，不利于深层网络的训练。</li>
+<li>分类任务的本质需求<br>大模型（如 LLM）常用于语言建模或多分类任务，目标是最大化正确类别的概率并压制其他类别。交叉熵的对数惩罚机制天然契合这一需求。MSE更适合平滑的回归预测。</li>
+<li>信息论的启发<br>交叉熵与最大似然估计等价，优化交叉熵等同于最大化数据似然。这种统计一致性在大规模数据集上尤为重要，而 MSE 缺乏类似的理论支撑。</li>
+</ul>
+<h4 id="优化器"><a href="#优化器" class="headerlink" title="优化器"></a>优化器</h4><p>训练模型需要根据损失函数的梯度方向来更新参数，优化算法是更新的策略，大模型使用的优化算法总的来说都属于梯度下降法。</p>
+<h5 id="自适应矩估计Adam"><a href="#自适应矩估计Adam" class="headerlink" title="自适应矩估计Adam"></a>自适应矩估计Adam</h5><p>Adam的特点是动量和自适应学习率。</p>
+<p>动量是利用了物理中动量的概念，使参数更新时具有一定“惯性”，通过计算梯度的一阶矩估计（均值）来实现。引入动量机制后，Adam 能够在优化过程中更快地收敛。特别是在面对具有陡峭梯度或复杂地形的目标函数时，动量可以帮助参数更新沿着梯度下降的方向更稳定地前进，减少优化过程中的震荡，从而提高收敛速度和优化效果。</p>
+<p>自适应学习率是通过计算梯度的二阶矩估计（未中心化的方差）以及对一阶矩估计和二阶矩估计进行偏差修正来实现的。二阶矩估计主要用于衡量梯度的变化幅度，在梯度的变化幅度较大时控制参数更新的步长变小，在梯度的变化幅度较小时控制参数更新的步长变大。在算法的初期，由于梯度的一阶矩和二阶矩的估计是从0开始初始化的，它们在初始阶段会被低估，偏差修正能加速初期的学习过程，并提高整体的优化效率。</p>
+<p>更新参数$\theta$的方程组如下：</p>
+
+$$
+{m}_{t}={\beta }_{1}\cdotp {m}_{t-1}+\left ( 1-{\beta }_{1}\right )\cdotp {g}_{t}
+$$
+
+$$
+{v}_{t}={\beta }_{2}\cdotp {v}_{t-1}+\left ( 1-{\beta }_{2}\right )\cdotp {g}_{t}^{2}
+$$
+
+$$
+\hat{m}_{t}=\frac{{m}_{t}}{1-{\beta }_{1}^{t}}
+$$
+
+$$
+\hat{v}_{t}=\frac{{v}_{t}}{1-{\beta }_{2}^{t}}
+$$
+
+$$
+{\theta }_{t}={\theta }_{t-1}-\frac{\eta }{\sqrt{\hat{v}_{t}}+\epsilon }\cdotp \hat{m}_{t}
+$$
+
+其中，${{g}_{t}}$为t时刻参数梯度，${m}_{t}$和${v}_{t}$分别是梯度的一阶矩估计和二阶矩估计，$\hat{m}_{t}$和$\hat{v}_{t}$则是经过偏差修正后的梯度一阶矩估计和二阶矩估计。${\beta }_{1}$和${\beta }_{2}$是一阶矩估计和二阶矩估计的指数衰减系数，通常是小于但接近1的。$\epsilon$是防止分母为0而添加的平滑项参数，$\eta$是学习率。
+
+<h5 id="Adamax"><a href="#Adamax" class="headerlink" title="Adamax"></a>Adamax</h5><p>Adamax 是 Adam 的一种变体，改进了 Adam 中对二阶矩估计的计算，从${L}_{2}$范数推广到无穷范数，使得算法在某些情况下更加稳定和高效。Adamax 对动量的计算与 Adam 一致，对二阶矩估计的计算和参数更新方程如下：</p>
+
+$$
+{u}_{t}={\beta }^{\infty }_{2}\cdotp {v}_{t-1}+\left ( 1-{\beta }^{\infty }_{2}\right )\cdotp \left | {g}_{t}\right |^{\infty}=max\left ( {\beta }_{2}\cdotp {v}_{t-1},\left | {g}_{t}\right |\right )
+$$
+
+$$
+{\theta }_{t}={\theta }_{t-1}-\frac{\eta }{{u}_{t} }\cdotp \hat{m}_{t}
+$$
+
+
+
+<h5 id="AdamW"><a href="#AdamW" class="headerlink" title="AdamW"></a>AdamW</h5><p>AdamW 也是 Adam 的一种变体，改进了 Adam 中参数更新的方式，加入了权重衰减的正则化。传统的 Adam 在进行权重衰减时，是将权重衰减项直接加到梯度中，这种方式在某些情况下会导致训练不稳定，并且与学习率的调整相互干扰。AdamW 提出了一种解耦的权重衰减方法，将权重衰减与梯度更新分开处理，使得权重衰减的调整更加独立和灵活。AdamW 对一阶矩估计和二阶矩估计的计算与 Adam 一致，参数更新方程如下：</p>
+
+$$
+{\theta }_{t}={\theta }_{t-1}-\eta\left ( \frac{\hat{m}_{t} }{\sqrt{\hat{v}_{t}}+\epsilon }+\lambda {\theta }_{t-1}\right )
+$$
+其中，$\lambda$是权重衰减系数。
+
+<h2 id="2-预训练技术"><a href="#2-预训练技术" class="headerlink" title="2.预训练技术"></a>2.预训练技术</h2><p>大模型一般分三阶段：</p>
+<p>预训练（Pre-Training）——监督微调（SFT）——人类反馈强化学习（RLHF）</p>
+<h3 id="2-1-数据处理"><a href="#2-1-数据处理" class="headerlink" title="2.1 数据处理"></a>2.1 数据处理</h3><h4 id="数据获取方法"><a href="#数据获取方法" class="headerlink" title="数据获取方法"></a>数据获取方法</h4><p>公开数据集的使用</p>
+<p>数据质量评估指标</p>
+<p><img src="/img/deeplearn/value.jpg"></p>
+<p>常见网络爬虫技术</p>
+<h4 id="数据清洗技术"><a href="#数据清洗技术" class="headerlink" title="数据清洗技术"></a>数据清洗技术</h4><h5 id="文本去重：MinHash"><a href="#文本去重：MinHash" class="headerlink" title="文本去重：MinHash"></a>文本去重：MinHash</h5><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/43640234">文本去重算法：Minhash&#x2F;Simhash&#x2F;Klongsent - 知乎</a></p>
+<p>基本原理：在A∪B这个大的随机域里，选中的元素落在A∩B这个区域的概率，这个概率就等于Jaccard的相似度。</p>
+<p>是一种用于估计两个集合相似度的概率算法。在文本去重领域，它通过将文本转换为特征集合，然后利用哈希函数随机选择特征集合中的最小哈希值来估计两个文本的Jaccard相似度。</p>
+<p><strong>最小哈希函数</strong>：对一组列向量的行进行同样的随机排列，重排后，每一个列向量的第一个非零元素的行号就是它的最小哈希函数值。直观上来说，如果两个文本完全重复，那么不论如何重排，两个文本对应的最小哈希函数值都应该是一样的。</p>
+<p>最小哈希函数将原始超高维的稀疏向量转化为低维的稠密向量，降低了计算的空间复杂度。对转换后的稠密向量进行分段索引，缩小潜在相似文本范围，降低了计算的时间复杂度。</p>
+<h5 id="训练数据配比策略"><a href="#训练数据配比策略" class="headerlink" title="训练数据配比策略"></a>训练数据配比策略</h5><p>百度面试提问：代码、数学、通用知识问答等各种占比多少比较合理？<br>需要取决于模型用途，并在实践中寻找效果最佳的配方，参考 <strong>LLaMA</strong> 的配比（论文）:</p>
+<ul>
+<li>Common Crawl: <strong>67.0%</strong></li>
+<li>C4: <strong>15.0%</strong></li>
+<li>GitHub: <strong>4.5%</strong></li>
+<li>Wikipedia: <strong>4.5%</strong></li>
+<li>书籍: <strong>4.5%</strong></li>
+<li>arXiv: <strong>2.5%</strong></li>
+<li>其他: <strong>2.0%</strong></li>
+</ul>
+<h3 id="2-2-预训练流程"><a href="#2-2-预训练流程" class="headerlink" title="2.2 预训练流程"></a>2.2 预训练流程</h3><h4 id="训练策略"><a href="#训练策略" class="headerlink" title="训练策略"></a>训练策略</h4><p>大模型预训练中超参数的设置和用途（见1.3.1.1超参数）</p>
+<p><a target="_blank" rel="noopener" href="https://jishuzhan.net/article/1897813759079600129">训练策略：优化深度学习训练过程的实践指南</a></p>
+<h5 id="提前停止"><a href="#提前停止" class="headerlink" title="提前停止"></a>提前停止</h5><p>Early Stopping ：当连续若干个训练周期（Epoch）内验证性能不再改善时，提前终止训练。</p>
+<h5 id="预热"><a href="#预热" class="headerlink" title="预热"></a>预热</h5><p>Warmup：在训练初期逐步增加学习率，避免模型刚开始训练时因过高的学习率导致梯度不稳定或损失震荡。大型模型常用。代码：torch.optim.lr_scheduler中的相关调度器。</p>
+<h5 id="学习率衰减"><a href="#学习率衰减" class="headerlink" title="学习率衰减"></a>学习率衰减</h5><p>Learning Rate Decay：在训练过程中逐渐降低学习率，使得模型在接近最优解时能够以更细致的步幅调整参数。</p>
+<ul>
+<li><strong>余弦衰减</strong>： 最流行的策略。学习率从峰值按余弦函数平滑下降到0，使得训练末期能更精细地收敛到最优点。</li>
+<li><strong>线性衰减</strong>： 另一种简单有效的策略。</li>
+</ul>
+<h4 id="预训练优化"><a href="#预训练优化" class="headerlink" title="预训练优化"></a>预训练优化</h4><p>了解各个策略如何保证训练稳定性。</p>
+<p>解决AI加速芯片内存限制，并运行大Batch size的一种方法是将数据Sample的Batch拆分为更小的Batch，叫做Mini-Batch。这些小Mini-Batch可以独立运行，并且在网络模型训练的时候，对梯度进行平均或者求和。</p>
+<h5 id="梯度累积"><a href="#梯度累积" class="headerlink" title="梯度累积"></a>梯度累积</h5><p>设置批大小的一种策略。按顺序执行Mini-Batch，同时对梯度进行累积，累积的结果在最后一个Mini-Batch计算后求平均更新模型变量。使用梯度累积的时候需要把学习率适当放大。</p>
+<h5 id="混合精度训练"><a href="#混合精度训练" class="headerlink" title="混合精度训练"></a>混合精度训练</h5><ul>
+<li>使用 <code>FP16</code>（半精度浮点数）进行前向和反向传播，大大减少了显存占用并加快了计算速度。</li>
+<li>同时保留一个 <code>FP32</code> 的主参数副本用于更新，以防止 <code>FP16</code> 下的精度损失和梯度下溢问题。这是通过NVIDIA的 <strong>AMP</strong> 工具自动实现的。</li>
+</ul>
+<h5 id="模型并行"><a href="#模型并行" class="headerlink" title="模型并行"></a>模型并行</h5><ul>
+<li><strong>张量并行</strong>： Tensor Parallelism，将模型的权重矩阵切分到多个GPU上，在单层内进行并行计算（如Megatron-LM）。极大地减少了单个GPU的显存占用。</li>
+<li><strong>流水线并行</strong>： Pipeline Parallelism，将模型的不同层分布到多个GPU上。一个批次的数据被分成多个微批次，像流水线一样在不同GPU间传递。</li>
+</ul>
+<h5 id="数据并行"><a href="#数据并行" class="headerlink" title="数据并行"></a>数据并行</h5><p>Data Parallelism，将批量数据分到多个GPU上，每个GPU有完整的模型副本。</p>
+<h5 id="混合并行"><a href="#混合并行" class="headerlink" title="混合并行"></a>混合并行</h5><p>现代大模型训练（如GPT-3、PaLM）都是<strong>3D并行</strong>，即同时使用数据并行、张量并行和流水线并行，以应对万亿参数级别的模型。</p>
+<h5 id="权重初始化"><a href="#权重初始化" class="headerlink" title="权重初始化"></a>权重初始化</h5><p><strong>GPT&#x2F;GPT-2初始化</strong>：将残差连接层和Embedding层按一个缩小的因子（如 <code>1/sqrt(N)</code>，N是残差层数）进行初始化。</p>
+<p><strong>Xavier初始化</strong>：</p>
+<ul>
+<li>希望初始化的权重值<strong>均匀分布</strong>，此时要给出权重初始化时的<strong>取值上下限</strong>。</li>
+<li>希望初始化的权重是<strong>高斯分布</strong>，此时要给出权重初始化时的<strong>标准差（均值为0）</strong>。</li>
+</ul>
+<p><strong>T5初始化</strong>： 使用“Xavier初始化”的变种，在Transformer块内部进行精细的缩放。</p>
+<h5 id="梯度裁剪"><a href="#梯度裁剪" class="headerlink" title="梯度裁剪"></a>梯度裁剪</h5><p>当梯度的范数超过某个阈值时，将其缩放回阈值（通常为1.0）内。防止<strong>梯度爆炸</strong>，稳定训练。</p>
+<h5 id="激活检查点"><a href="#激活检查点" class="headerlink" title="激活检查点"></a>激活检查点</h5><p>也称为“梯度检查点”或“重计算”。在前向传播时，只保留部分层的激活值（中间结果），其余的在反向传播需要时临时重新计算。这是一种典型的 “时间换空间” 的策略，可以大幅降低显存占用（有时可达60-70%），代价是增加约25%的计算时间。</p>
+<h3 id="2-3-结果评估"><a href="#2-3-结果评估" class="headerlink" title="2.3 结果评估"></a>2.3 结果评估</h3><h4 id="测评数据集"><a href="#测评数据集" class="headerlink" title="测评数据集"></a>测评数据集</h4><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_43431218/article/details/135631534">【大模型评测】常见的大模型评测数据集_mmlu数据集-CSDN博客</a></p>
+<h5 id="MMLU"><a href="#MMLU" class="headerlink" title="MMLU"></a>MMLU</h5><p>MMLU（大规模多任务语言理解）是一种新的基准测试，旨在通过仅在零样本和少样本设置中评估模型来衡量预训练期间获得的知识。这使得基准更具挑战性，并且更类似于我们评估人类的方式。该基准涵盖 STEM、人文、社会科学等领域的 57 个学科，难度从初级到高级专业水平不等，既考验世界知识，也考验解决问题的能力。科目范围从数学和历史等传统领域到法律和伦理学等更专业的领域。主题的粒度和广度使基准测试成为识别模型盲点的理想选择。<br>         MMLU 是一个包含了 57 个子任务的英文评测数据集，涵盖了初等数学、美国历史、计算机科学、法律等，难度覆盖高中水平到专家水平，有效地衡量了人文、社科和理工等多个大类的综合知识能力。</p>
+<h5 id="IF-EVAL"><a href="#IF-EVAL" class="headerlink" title="IF-EVAL"></a>IF-EVAL</h5><p>IFEval（Instruction-Following Evaluation）是一个专门用于评估 大型语言模型（LLMs）指令跟随能力 的基准数据集。其核心特点是使用 可验证指令（verifiable instructions），即可以通过确定性规则（如正则匹配、计数、格式检查）自动判断模型是否遵循指令。</p>
+<h5 id="MATH"><a href="#MATH" class="headerlink" title="MATH"></a>MATH</h5><p>MATH 是一个由数学竞赛问题组成的评测集，由 AMC 10、AMC 12 和 AIME 等组成，包含 7.5K 训练数据和 5K 测试数据。</p>
+<h4 id="评估指标"><a href="#评估指标" class="headerlink" title="评估指标"></a>评估指标</h4><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/u012856866/article/details/146541361">【大模型】大模型评价指标汇总解析-CSDN博客</a></p>
+<h5 id="F1-score"><a href="#F1-score" class="headerlink" title="F1 score"></a>F1 score</h5><p><img src="/img/deeplearn/F1.png"></p>
+<h5 id="EM"><a href="#EM" class="headerlink" title="EM"></a>EM</h5><p>EM (Exact Match) 指标可被译为确切匹配或绝对匹配，完全匹配时（生成的答案与参考答案完全相同，字符级匹配），EM值为1，不完全匹配时，EM值为0。EM是一种比较严格的匹配，其衡量预测答案是否与标准答案完全一致。匹配的衡量方式比较呆板，可以设定一个阈值，来衡量完全匹配这个概念。</p>
+<h5 id="BLEU"><a href="#BLEU" class="headerlink" title="BLEU"></a>BLEU</h5><p>（Bilingual Evaluation Understudy）是机器翻译质量评估中最广泛使用的自动化评测指标之一。BLEU通过比较机器翻译的结果与一个或多个参考译文之间的相似度来衡量翻译质量。主要是基于精确率(Precision)的。比较候选译文和参考译文里的 n-gram 的重合程度，通常取N&#x3D;1~4，再加权平均。分数越接近1，说明翻译的质量越高。</p>
+<h5 id="ROUGE"><a href="#ROUGE" class="headerlink" title="ROUGE"></a>ROUGE</h5><p>(Recall-Oriented Understudy for Gisting Evaluation)专注于召回率（关注有多少个参考译句中的 n- gram出现在了输出之中）而非精度，分数越接近1，说明生成文本与参考文本匹配度越高。很大程度上是为了解决NMT（神经网络机器翻译）的漏翻问题（低召回率）。</p>
+<h3 id="2-4-增量预训练：领域知识"><a href="#2-4-增量预训练：领域知识" class="headerlink" title="2.4 增量预训练：领域知识"></a>2.4 增量预训练：领域知识</h3><p>要想大模型有<strong>领域知识</strong>，得增量预训练。是在预训练后进行的额外步骤，仍然属于预训练步骤。通过新数据或新任务进一步优化模型参数或者针对特定需求对已有基座模型进行定向增强。</p>
+<h2 id="3-后训练技术"><a href="#3-后训练技术" class="headerlink" title="3.后训练技术"></a>3.后训练技术</h2><h3 id="3-1-监督微调-SFT"><a href="#3-1-监督微调-SFT" class="headerlink" title="3.1 监督微调(SFT)"></a>3.1 监督微调(SFT)</h3><p>训练目标：实现模型与人类意图<strong>对齐</strong>。最大化给定指令和输入条件下，目标回答的似然概率。在计算损失时，通常<strong>只计算<code>output</code>部分（即答案）的损失</strong>。这迫使模型专注于学习如何生成正确的答案，而不是记住指令。通常比预训练“温和”得多，学习率小1-2个数量级，训练轮数较小。</p>
+<p>学习率设置策略（见2.2.1训练策略）</p>
+<ul>
+<li><p>腾讯面试提问：SFT与预训练过程中loss计算有什么不同?</p>
+<p>[ 屏蔽语言模型(MLM)和因果语言模型(CLM) ]</p>
+<table>
+<thead>
+<tr>
+<th>特征</th>
+<th>预训练</th>
+<th>对齐 (SFT)</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>目标</td>
+<td>学习通用语言表示</td>
+<td>迁移到特定任务</td>
+</tr>
+<tr>
+<td>数据</td>
+<td>海量未标注数据</td>
+<td>高质量标注数据</td>
+</tr>
+<tr>
+<td>Loss函数</td>
+<td>自监督学习 (MLM, CLM)</td>
+<td>监督学习 (Cross-Entropy, MSE)</td>
+</tr>
+<tr>
+<td>Loss特点</td>
+<td>数值较大，关注语言理解</td>
+<td>数值较小，关注任务表现</td>
+</tr>
+</tbody></table>
+</li>
+</ul>
+<h4 id="基础微调技术"><a href="#基础微调技术" class="headerlink" title="基础微调技术"></a>基础微调技术</h4><h5 id="全参数微调"><a href="#全参数微调" class="headerlink" title="全参数微调"></a>全参数微调</h5><p>（Full Parameter Tuning），全量微调（Full Fine-tuning），更新模型所有参数。</p>
+<h4 id="高效参数微调"><a href="#高效参数微调" class="headerlink" title="高效参数微调"></a>高效参数微调</h4><h5 id="LORA"><a href="#LORA" class="headerlink" title="LORA"></a>LORA</h5><p>低秩自适应微调。可以说，适配器通过为权重加入残差的方式进行微调。将参数量巨大的权重矩阵分解，映射到r维的潜在空间里进行参数更新，再映射回大维度矩阵。</p>
+<h5 id="QLORA"><a href="#QLORA" class="headerlink" title="QLORA"></a>QLORA</h5><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/666234324">QLoRA（Quantized LoRA）详解 - 知乎</a></p>
+<p>QLoRA的工作有三个，第一个工作是结合了分位数量化和分块量化的<strong>4位标准浮点数量化</strong>（4-bit NormalFloat Quantization）。第二个工作是对模型进行两次量化的<strong>双重量化</strong>（Double Quantization），它的第二次量化只作用在第一次量化产生的量化常数上，可以进一步节约显存占用。第三个工作是<strong>分页优化</strong>（Paged Optimizer），使用CPU内存代替GPU显存保存部分梯度参数。</p>
+<h5 id="Prefix-Tuning"><a href="#Prefix-Tuning" class="headerlink" title="Prefix Tuning"></a>Prefix Tuning</h5><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/639685912">深入理解Prefix Tuning - 知乎</a></p>
+<p>在模型输入前添加一个连续的且任务特定的向量序列称之为prefix，添加到所有的transformer层，固定PLM的所有参数，只更新优化特定任务的prefix。</p>
+<p>直接更新多个虚拟token的参数效果不稳定，因此在Prefix层加了MLP，分解成了更小的embedding层 更大的MLP层。原始的embedding层参数是n_prefix emb_dim，调整后变为n_prefix * n_hidden + n_hidden * emb_dim。训练完成后这部分就不再需要只保留MLP输出的参数进行推理即可。</p>
+<h5 id="P-Tuning"><a href="#P-Tuning" class="headerlink" title="P-Tuning"></a>P-Tuning</h5><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/635848732">大模型参数高效微调技术原理综述（三）-P-Tuning、P-Tuning v2 - 知乎</a></p>
+<p>相比Prefix Tuning，加入一种连续可微的virtual token，但仅限于输入层，没有在每一层都加；另外，virtual token的位置也不一定是前缀，插入的位置是可选的。</p>
+<h5 id="P-TuningV2"><a href="#P-TuningV2" class="headerlink" title="P-TuningV2"></a>P-TuningV2</h5><p>利用深度提示优化，在每一层都加入了Prompts tokens作为输入，而不是仅仅加在输入层。</p>
+<h5 id="Adapter-Tuning"><a href="#Adapter-Tuning" class="headerlink" title="Adapter Tuning"></a>Adapter Tuning</h5><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_56591814/article/details/131293940">大模型高效微调综述上：Adapter Tuning、AdaMix、PET、Prefix-Tuning、Prompt Tuning、P-tuning、P-tuning v2_parameter efficient tuning with kronecker adapter-CSDN博客</a></p>
+<p>在神经网络模块基础上添加一些残差模块，并只优化这些残差模块，由于残差模块的参数更少，因此微调成本更低。</p>
+<h3 id="3-2-人类偏好对齐"><a href="#3-2-人类偏好对齐" class="headerlink" title="3.2 人类偏好对齐"></a>3.2 人类偏好对齐</h3><h4 id="RLHF技术"><a href="#RLHF技术" class="headerlink" title="RLHF技术"></a>RLHF技术</h4><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/1899472091121682346">RLHF是什么？一文说清RLHF（人类反馈强化学习）的概念和实现过程 - 知乎</a></p>
+<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/7560223610264649766">大模型面试题剖析：大模型训练关键技术解析（从 RLHF 、RLAIH、DPO到 SFT）</a></p>
+<p>人类反馈强化学习（Reinforcement Learning from Human Feedback）是一种结合了<strong>强化学习</strong>（Reinforcement Learning，RL）和<strong>人类反馈</strong>的机器学习方法。适用于那些难以通过传统监督学习方法获得高质量标签数据的情况。</p>
+<h5 id="数据构建过程"><a href="#数据构建过程" class="headerlink" title="数据构建过程"></a>数据构建过程</h5><p>在实际操作中，首先需要收集人类反馈。这可以通过不同方式进行，如让人类观察代理的行为并打分，或者直接对错误的行为进行更正。</p>
+<p>使用收集到的数据来建立或优化奖励模型。这可能涉及到机器学习或深度学习技术，用以从人类反馈中提取有效信息并将其转化为可以量化的奖励信号。</p>
+<h5 id="奖励模型训练过程"><a href="#奖励模型训练过程" class="headerlink" title="奖励模型训练过程"></a>奖励模型训练过程</h5><p>RLHF是一个迭代过程。代理根据当前的奖励模型进行学习和行动，然后根据新的人类反馈来更新奖励模型。这个过程不断重复，以逐渐提升代理的性能。</p>
+<p>第一步：监督微调（SFT）</p>
+<p>这相当于给AI一些示范，告诉它”这样回答是好的”。工程师们会收集高质量的问答对，让模型通过模仿学习基本的回答方式。</p>
+<p>第二步：建立奖励模型（RM）</p>
+<p>这一步要训练一个能”评分”的模型。人类标注者会对同一问题的不同回答进行比较和排序，然后用这些数据训练一个能预测”人类会更喜欢哪个回答”的模型。</p>
+<p>第三步：强化学习（RL）</p>
+<p>最后，利用第二步训练的奖励模型作为指导，对语言模型进行优化。每当模型生成一个回答，奖励模型就会给出评分，模型根据这个信号不断调整自己的策略，逐渐生成更符合人类偏好的内容。</p>
+<h5 id="PPO"><a href="#PPO" class="headerlink" title="PPO"></a>PPO</h5><p>近端策略优化，Open AI采用。</p>
+<p>通过强化学习让模型主动朝着高奖励的方向优化。</p>
+<ul>
+<li>从提示词数据集中选取一个全新的提示词，确保训练的多样性。</li>
+<li>使用第一步训练好的监督策略模型来初始化PPO模型，让PPO模型具备基础的生成能力。</li>
+<li>PPO 模型根据新提示词生成一个完整的输出（如故事）。</li>
+<li>调用第二步训练好的奖励模型，对这个新生成的输出进行评估，计算出对应的奖励值。</li>
+<li>利用 PPO 算法，结合奖励模型给出的奖励值，对 PPO 模型的策略进行更新。</li>
+</ul>
+<p>PPO 算法的核心优势在于，它通过限制每次策略更新的幅度，避免模型因更新幅度过大而导致训练不稳定，能够在复杂的决策任务中，稳步提升模型生成高质量输出的能力，经过多轮迭代后，模型的输出质量会得到显著提升。</p>
+<h5 id="DPO"><a href="#DPO" class="headerlink" title="DPO"></a>DPO</h5><p>直接偏好优化，是跳过奖励模型的 “高效捷径”，通过直接利用人类的偏好数据来优化模型，省去了奖励模型的构建环节。</p>
+<p>核心在于构建一个包含人类偏好的数据集，每个数据对由一个提示词和两个可能的输出组成，其中一个是人类首选的输出，另一个是人类认为不受欢迎的输出。</p>
+<p>例如，对于提示词 “解释什么是人工智能”，首选输出可能是逻辑清晰、通俗易懂且涵盖核心概念的解释，而不受欢迎的输出则可能是内容混乱、遗漏关键信息的解释。</p>
+<p>模型训练过程中，DPO 的目标非常明确：最大化模型生成首选输出的概率，同时最小化生成不受欢迎输出的概率。这一过程可以看作是一个二分类问题，模型需要学习区分首选输出和不受欢迎输出的特征，进而调整自身的参数。</p>
+<p>与 RLHF 相比，DPO 无需花费大量精力构建和训练奖励模型，不仅降低了技术复杂度，还减少了训练过程中的计算资源消耗，在一些对训练效率要求较高的场景中，具有显著的优势。</p>
+<p>此外，在 DPO 的基础上，还衍生出了组<strong>相对策略优化</strong>（GRPO）技术。GRPO 进一步扩展了偏好数据的形式，不再局限于单个提示词对应两个输出的形式，而是允许一个提示词对应一组输出，并对这组输出进行整体的偏好排序，从而让模型能够学习到更复杂的人类偏好关系，进一步提升模型的输出质量。</p>
+<h5 id="前沿对齐算法"><a href="#前沿对齐算法" class="headerlink" title="前沿对齐算法"></a>前沿对齐算法</h5><p>IPO（Identity Preference Optimization）：通过在损失函数中增加一个正则化项，直接惩罚奖励差距过大，从而鼓励模型进行更温和、更泛化的优化。</p>
+<p>KTO（Kahneman-Tversky Optimization）：不需要成对的偏好数据，只需要知道一个回答是“可取的”还是“不可取的”即可。它基于前景理论，将“可取”的样本拉向模型分布，同时将“不可取”的样本推远。</p>
+<p>ORPO（Odds Ratio Preference Optimization）：将偏好优化直接集成到SFT阶段。在标准SFT的损失函数上增加了一个额外的偏好损失项，增加被偏好回答的几率，降低被拒绝回答的几率。</p>
+<h2 id="4-推理加速"><a href="#4-推理加速" class="headerlink" title="4.推理加速"></a>4.推理加速</h2><h3 id="4-1-框架应用"><a href="#4-1-框架应用" class="headerlink" title="4.1 框架应用"></a>4.1 框架应用</h3><h4 id="DeepSpeed"><a href="#DeepSpeed" class="headerlink" title="DeepSpeed"></a>DeepSpeed</h4><p><strong>ZeRO</strong></p>
+<p>零冗余优化器，是数据并行的增强版。它将一些信息在数据并行进程间进行分区，而不是每个进程都保留一份完整副本。</p>
+<p>ZeRO1：优化器状态</p>
+<p>ZeRO2：优化器状态和梯度</p>
+<p>ZeRO3：优化器状态、梯度和模型参数</p>
+<p><strong>ZeRO-Offload</strong>： 将部分数据（如优化器状态）从GPU显存卸载到CPU内存，从而在单个GPU上训练更大的模型。</p>
+<p><strong>ZeRO-infinity</strong>：在 ZeRO-Offload 的基础上进一步优化。</p>
+<ul>
+<li>将和ZeRO的结合从ZeRO-2延伸到了ZeRO-3，解决了模型参数受限于单张GPU内存的问题。</li>
+<li>解决了 ZeRO-Offload 在训练 batch size 较小的时候效率较低的问题。</li>
+<li>除 CPU 内存外，进一步尝试利用 NVMe 的空间。</li>
+</ul>
+<h4 id="Megatron-LM"><a href="#Megatron-LM" class="headerlink" title="Megatron-LM"></a>Megatron-LM</h4><p><img src="/img/deeplearn/Megatron.png"></p>
+<p>（各种并行技术见2.2.2）</p>
+<p>Megatron模型并行策略：综合应用了数据并行，张量并行（Tensor Parallelism）和流水线并行</p>
+<h3 id="4-2-性能优化算法"><a href="#4-2-性能优化算法" class="headerlink" title="4.2 性能优化算法"></a>4.2 性能优化算法</h3><h4 id="KV-Cache技术"><a href="#KV-Cache技术" class="headerlink" title="KV Cache技术"></a>KV Cache技术</h4><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_35229591/article/details/142334265">KV-Cache详解_kv cache-CSDN博客</a></p>
+<p><strong>仅在decoder进行</strong>，为了避免重复计算历史 Key 和 Value 向量，推理系统将它们缓存下来，称为 KV Cache（Key-Value 缓存）。节省了对于键（Key）和值（Value）的重复计算，显著提升推理效率。</p>
+<p>前沿的KV Cache算法。</p>
+<h4 id="注意力优化"><a href="#注意力优化" class="headerlink" title="注意力优化"></a>注意力优化</h4><h5 id="FlashAttention"><a href="#FlashAttention" class="headerlink" title="FlashAttention"></a>FlashAttention</h5><p>一种革命性的IO感知算法，通过精巧的核函数实现，避免在GPU高速显存中存储巨大的注意力矩阵，从而显著降低内存占用并提升计算速度。核心原理是通过将输入<strong>分块</strong>并在每个块上执行注意力操作，从而减少对高带宽内存（HBM）的读写操作。</p>
+<h5 id="FlashAttentionV2"><a href="#FlashAttentionV2" class="headerlink" title="FlashAttentionV2"></a>FlashAttentionV2</h5><p>进一步优化了性能，已成为训练长上下文模型的标配。不需要在全局内存上实现 X 和 A 矩阵，而是将整个注意力计算融合到单个 CUDA 内核中。</p>
+<h5 id="pageAttention"><a href="#pageAttention" class="headerlink" title="pageAttention"></a>pageAttention</h5><p><a target="_blank" rel="noopener" href="https://developer.aliyun.com/article/1664805">vLLM 核心技术 PagedAttention 原理详解-阿里云开发者社区</a></p>
+<p>为了解决 KV Cache 内存管理中的高占用、严重碎片和复用困难等问题，vLLM 提出的一种全新的注意力机制。核心思想借鉴自操作系统中的虚拟内存分页机制。</p>
+<ol>
+<li><strong>KV Cache 被切分为固定大小的 block</strong>：PagedAttention 将每个序列的 KV Cache 切分为固定大小的 block（默认是 16 个 token），每个 block 存储若干个 token 的 Key 和 Value 向量。这种设计统一了内存分配粒度，使系统能够以更标准化的方式管理 KV Cache 的分配与回收，从而提升内存复用效率，并有效减少内存碎片。</li>
+<li><strong>block 可以存放在非连续的物理内存中</strong>：与传统的 Attention 不同，PagedAttention 不再要求这些 KV 向量在内存中连续排列，而是通过逻辑 block 与物理 block 的映射，实现非连续存储。映射关系由 block table 维护，它类似于操作系统中的页表，用于记录每个逻辑 block 对应的物理内存位置，确保模型在推理过程中可以正确读取所需的 KV Cache。</li>
+<li><strong>支持灵活的分配与释放，以及共享机制</strong>：PagedAttention 支持按需分配和回收 block，并允许多个序列共享 block。PagedAttention 使用了 copy-on-write（CoW）机制，允许多个生成样本共享大部分输入 prompt 的 KV Cache，只有当某个分支需要写入新 token 的 KV 数据时，系统才会将相关 block 复制到新的物理位置，从而在保证数据隔离的同时极大地节省显存资源，提升推理效率与吞吐量。</li>
+</ol>
+<h3 id="4-3-知识蒸馏"><a href="#4-3-知识蒸馏" class="headerlink" title="4.3 知识蒸馏"></a>4.3 知识蒸馏</h3><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/1935796159261148086">知识蒸馏（Knowledge Distillation）：一篇从核心原理到前沿应用的完整指南 - 知乎</a></p>
+<p>Knowledge Distillation，为了在不显著牺牲性能的前提下，让模型变得更小、更快、更易于部署。利用一个较大、较准确的模型的预测结果来指导一个较小、较简单的模型学习。这种方法可以减小模型的复杂度，提高模型的泛化能力和推理速度。</p>
+<h4 id="暗知识"><a href="#暗知识" class="headerlink" title="暗知识"></a>暗知识</h4><p>传统的模型训练，是让模型直接从“<strong>硬标签</strong>”（Hard Labels）中学习。非黑即白的监督方式。</p>
+<p><strong>软标签</strong>：大网络在每一层卷积后输出的特征映射。即每种分类结果的概率分布。</p>
+<p>概率值包含比硬标签更多的信息：主要判断、相似性信息、不相关性信息。</p>
+<p>通过在Softmax函数中加入温度<code>T</code>，我们可以“软化”教师的输出概率，得到所谓的“<strong>软标签</strong>”（Soft Labels）。随着温度T的升高，教师模型的输出概率分布从尖锐变得平滑，从而让负标签中的“<strong>暗知识</strong>”更容易被学生模型学习。</p>
+<h4 id="损失函数-1"><a href="#损失函数-1" class="headerlink" title="损失函数"></a>损失函数</h4><p>由两部分组成。用一个超参数来平衡两个损失的重要性。</p>
+<p>学生损失：学生模型的最终预测和真实标签分布之间的交叉熵。</p>
+<p>蒸馏损失：学生模型预测的软标签和教师模型的软标签的概率分布之间的距离，即KL散度。</p>
+<h4 id="特征式知识蒸馏"><a href="#特征式知识蒸馏" class="headerlink" title="特征式知识蒸馏"></a>特征式知识蒸馏</h4><p>强制学生模型直接模仿教师模型在某些<strong>中间层</strong>输出的特征图谱。</p>
+<p>信息同样渗透在网络处理信息的整个过程，即中间层的特征表示中。应该让学生模型学习“思考过程”。</p>
+<ul>
+<li><strong>流式解题过程 (Flow of Solution Procedure, FSP)<strong>：计算不同层特征图之间的</strong>格拉姆矩阵（Gram Matrix）</strong>，该矩阵捕捉了特征通道之间的相关性。蒸馏的目标是让学生模型的FSP矩阵与教师模型的 FSP 矩阵保持一致。</li>
+<li>**注意力迁移 (Attention Transfer)**：在 Transformer 等注意力模型中，注意力矩阵本身就是一种宝贵的关系知识，它体现了模型在处理序列时，不同部分之间的依赖关系。可以让学生模型的注意力图谱去模仿教师模型的注意力图谱。</li>
+<li><strong>角度蒸馏 (Angle-wise Distillation)<strong>：不直接匹配特征向量，而是匹配不同样本特征向量之间的</strong>角度或距离关系</strong>。这保留了数据点在教师特征空间中的几何结构。</li>
+</ul>
+<h3 id="4-4-模型量化"><a href="#4-4-模型量化" class="headerlink" title="4.4 模型量化"></a>4.4 模型量化</h3><p><strong>量化</strong>（Quantization）：将浮点型参数转换为更小的整数或定点数，从而减小模型大小和内存占用，提高计算效率。</p>
+<p><strong>模型量化</strong>（Model Quantization）：将模型的权重和激活函数的精度从32位浮点数减少到更小的位数， 从而减小模型的大小和计算开销。</p>
+<p>常用方法：</p>
+<p>1.量化权重和激活值，将它们转换为整数或小数。</p>
+<p>2.使用更小的数据类型，例如8位整数、16位浮点数等。</p>
+<p>3.使用压缩算法，例如Huffman编码、可逆压缩算法等</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/penriver/article/details/136411485">大模型（LLM）的量化技术Quantization原理学习-CSDN博客</a></p>
+<h4 id="非对称量化"><a href="#非对称量化" class="headerlink" title="非对称量化"></a>非对称量化</h4><p>现在 LLM 主要采用的是均匀量化，它又可以分为对称量化、非对称量化。</p>
+<p><img src="/img/deeplearn/quant.png"></p>
+<p>对称量化中，z&#x3D;0。</p>
+<h4 id="训练后量化PTQ"><a href="#训练后量化PTQ" class="headerlink" title="训练后量化PTQ"></a>训练后量化PTQ</h4><p>根据量化的时机，有量化感知训练和训练后量化两条路径。</p>
+<p>Post-training quantization，将已经训练好的模型的权重转换为较低的精度，而无需任何再训练。尽管PTQ简单易实现，但由于权重值的精度损失，它可能会略微降低模型的性能。目前针对 LLM 的量化研究都集中在PTQ（LLM.int8(), SmoothQuant, GPT-Q）。</p>
+<h4 id="量化感知训练QAT"><a href="#量化感知训练QAT" class="headerlink" title="量化感知训练QAT"></a>量化感知训练QAT</h4><p>Quantization Aware Training，首先正常预训练模型，然后在模型中插入“伪量化节点”，继续微调。所谓“伪量化节点”，就是对权重和激活先量化，再反量化。这样引入了量化误差，让模型在训练过程中“感知”到量化操作，在优化 training loss 的同时兼顾 quantization error。</p>
+<p>与PTQ不同，QAT在训练阶段集成了权重转换过程。这通常不会明显降低模型性能，但对计算的要求更高。QLoRA就是一种高度使用QAT的技术。（见3.1.2.2）</p>
+<h4 id="动-静态量化"><a href="#动-静态量化" class="headerlink" title="动&#x2F;静态量化"></a>动&#x2F;静态量化</h4><p>对于权重而言，可以在推理前事先计算好量化系数，完成量化。但是激活（即各层的输入）事先是未知的，取决于具体的推理输入，会更加棘手。根据对激活的量化，分为动态与静态量化。</p>
+<p>动态量化：是 on-the-fly 的方式，推理过程中实时计算激活的量化系数，对激活进行量化。</p>
+<p>静态量化：静态量化在推理前就计算好激活的量化系数，在推理过程中应用。</p>
+<h4 id="量化感知微调"><a href="#量化感知微调" class="headerlink" title="量化感知微调"></a>量化感知微调</h4><p><a target="_blank" rel="noopener" href="https://blog.csdn.net/boboly186/article/details/151117955">一.Yolov8量化感知训练微调(QAT)第一篇:QAT原理和微调训练流程_qat训练-CSDN博客</a></p>
+<p>带量化感知的微调模型和每个epoch后的QAT模型评估。在微调过程中，模型被训练以最小化其量化输出与原始（非量化）模型输出之间的差异。这有助于模型学习在量化效果下保持精度。</p>
+<h3 id="4-5-其他模型压缩和加速方法"><a href="#4-5-其他模型压缩和加速方法" class="headerlink" title="4.5 其他模型压缩和加速方法"></a>4.5 其他模型压缩和加速方法</h3><p><strong>低秩分解</strong>（Low-Rank Decomposition）：通过将一个较大的权重矩阵分解为几个较小的权重矩阵，从而减少计算开销。</p>
+<h4 id="蒸馏对抗网络"><a href="#蒸馏对抗网络" class="headerlink" title="蒸馏对抗网络"></a>蒸馏对抗网络</h4><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/309839024">【Mo 人工智能技术博客】当蒸馏遇上GAN - 知乎</a></p>
+<p>Distillation Adversarial Networks，在知识蒸馏的基础上，通过对抗训练来提高模型的鲁棒性和抗干扰能力。</p>
+<p>可以生成一个假的数据集，然后用这个假数据集作为教师和学生公用的数据集，并在上面做蒸馏操作。</p>
+<p>生成器损失函数：</p>
+<ul>
+<li>one-hot损失函数：交叉熵，使教师模型的输出靠近做成one-hot向量的概率最大的类别。</li>
+<li>激活损失函数：用L1范数来衡量激活神经元的个数，使这个数量尽可能多。如果生成的图像和真实图像相似，那么他在中间层被激活的神经元也应该更多。</li>
+<li>信息熵损失函数：最大化生成类别信息熵。生成的图片应该在每一个类别上的分布都是均衡的，此时信息量也是最大的。</li>
+</ul>
+<h4 id="卷积分解"><a href="#卷积分解" class="headerlink" title="卷积分解"></a>卷积分解</h4><p><a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/12445524737">【论文解读】Inception-v2&#x2F;v3：利用卷积分解等手段进一步优化Inception架构 - 知乎</a></p>
+<p>Convolution Decomposition，将卷积层分解成几个更小的卷积层或全连接层，以减小计算开销。</p>
+<ol>
+<li><p>将大卷积核分解为小卷积核（VGG）</p>
+<p>例如，一个<code>5 × 5</code>的卷积可以被分解为两个堆叠的<code>3 × 3</code>卷积，能节省约28%的计算量。</p>
+</li>
+<li><p>使用不对称卷积分解空间卷积</p>
+<p>可以将<code>3 × 3</code>的卷积分解为<code>3 × 1</code>和<code>3 × 1</code>的卷积序列，计算量降低了约33%。</p>
+</li>
+</ol>
+<p>层次化剪枝（Layer-wise Pruning）：对模型的不同层进行不同程度的剪枝，以实现更高效的模型压缩和加速。</p>
+<p>参数剪枝（Parameter Pruning）：删除模型中冗余的参数，减少模型的大小。通常情况下，只有很少一部分参数对模型的性能贡献较大，其余参数对性能的贡献较小或没有贡献，因此可以删除这些冗余参数。</p>
+<p>网络剪枝（Network Pruning）：删除模型中冗余的神经元，从而减小模型的大小。与参数剪枝不同， 网络剪枝可以删除神经元而不会删除对应的参数。</p>
+<p>网络剪裁（Network Trimming）：通过对模型中一些不重要的连接进行剪裁，从而减小计算开销。</p>
+<h2 id="5-常见大模型架构"><a href="#5-常见大模型架构" class="headerlink" title="5.常见大模型架构"></a>5.常见大模型架构</h2><h3 id="5-1-经典架构"><a href="#5-1-经典架构" class="headerlink" title="5.1 经典架构"></a>5.1 经典架构</h3><p>大模型架构</p>
+<p>了解常见的大模型架构如</p>
+<p>GPT系列、</p>
+<p>LLaMA系列、</p>
+<p>GLM系列、</p>
+<p>Qwen系列、</p>
+<p>DeepSeek系列等。</p>
+<p>对比他们之间的差异，以及每个系列模型演变过程。</p>
+<p>模型族特点：对比 GPT、BERT、T5、LLaMA 等模型的方向性、典型应用、参数量级和训练目标等差异。</p>
+<h3 id="5-2-创新架构"><a href="#5-2-创新架构" class="headerlink" title="5.2 创新架构"></a>5.2 创新架构</h3><p>Mixture of Experts</p>
+<p>了解混合专家模型架构，与Dense架构有啥优劣</p>
+<p>Mamba</p>
+<p>RWKV</p>
+<p>了解Mamba.RWKV等前沿架构，它们的创新之处。与Transformer架构的优劣对比。</p>
+<h2 id="6-大模型应用"><a href="#6-大模型应用" class="headerlink" title="6.大模型应用"></a>6.大模型应用</h2><h3 id="6-1-检索增强生成-RAG"><a href="#6-1-检索增强生成-RAG" class="headerlink" title="6.1 检索增强生成(RAG)"></a>6.1 检索增强生成(RAG)</h3><p>检索技术。掌握检索算法(如HNSW。等)、向量数据库选择、Embedding模型微调、文档切分算法、文本相似度计算方法、Query理解、意图识别、混合检索等技术。</p>
+<p>增强策略。如何实现多轮问答、了解RAG中的提示词工程、熟悉相关重排算法原理、如何利用专业领域知识针对性微调底座大模型等。</p>
+<h3 id="6-2-Agent"><a href="#6-2-Agent" class="headerlink" title="6.2 Agent"></a>6.2 Agent</h3><p>框架与工具。了解ReAct范式，相关工具使用等。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="https://mugaiashe.github.io">MugaiAshe</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="https://mugaiashe.github.io/posts/81c7eb00.html">https://mugaiashe.github.io/posts/81c7eb00.html</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://mugaiashe.github.io/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来源 <a href="https://mugaiashe.github.io" target="_blank">MugaiAshe's Blog</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/deeplearning/">deeplearning</a></div><div class="post-share"><div class="social-share" data-image="/img/deeplearning/network.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><a class="pagination-related" href="/posts/70c361d5.html" title="go语言从零入门学习笔记（持续更新中）"><div class="cover" style="background: var(--default-bg-color)"></div><div class="info"><div class="info-1"><div class="info-item-1">上一篇</div><div class="info-item-2">go语言从零入门学习笔记（持续更新中）</div></div><div class="info-2"><div class="info-item-1">go语言学习教程：Go语言中文文档，本文基本上是该文档的干货版。 远航-博客 Go 语言教程 | 菜鸟教程 go语言（或 Golang）是Google开发的开源编程语言，在多核并发上拥有原生的设计优势，从底层原生支持并发。Go语言的并发是基于 goroutine 的，goroutine 类似于线程，但并非线程。可以将 goroutine 理解为一种虚拟线程。 安装：All releases - The Go Programming Language 安装后，确保环境变量正确，新建工作区，在vscode中添加go插件。 直接运行示例程序： 1go run main.go  输出.exe可执行文件： 1go build main.go  基础常用包12345678import (    &quot;encoding/json&quot;    &quot;fmt&quot;    &quot;os&quot;    &quot;math/rand&quot;    &quot;time&quot;   ...</div></div></div></a><a class="pagination-related" href="/posts/ded5e95e.html" title="妙手回春拯救死刑虚拟机&amp;缩小虚拟机文件大小"><img class="cover" src="/img/head1.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="info text-right"><div class="info-1"><div class="info-item-1">下一篇</div><div class="info-item-2">妙手回春拯救死刑虚拟机&缩小虚拟机文件大小</div></div><div class="info-2"><div class="info-item-1">ubuntu虚拟机进入死循环，内存爆满导致崩溃，磁盘也被占满。删除快照并不能影响虚拟机的内存大小，反而会因磁盘占满而无法删除，vmware又会失去该快照的记录无法重新删除，甚至会导致使虚拟机文件更大。 我将虚拟机整个文件夹移到空间充裕的硬盘上，然而移动过程中也恰好导致虚拟机发生错误，无法再次开机。 重新开机后会进入救援模式，选择Advanced options for Ubuntu，再选择较新版本带（recovery mode），显示（initramfs），这是因为虚拟机文件损坏，加载出现错误。使用fsck命令修复： 1fsck -y /dev/sdb1  将设备从sdb1到sdb3都试了一遍，扫描出错误就输入yes进行修复。重启能成功打开，接下来就是缩小虚拟机文件。  在vmware的虚拟机设置——硬盘中，有碎片整理、磁盘压缩，但并不好用，耗时长且缩小有限。  将“文件“中，选择将虚拟机另存为ovf文件，然后重新从ovf打开虚拟机。这种方法能有效缩小虚拟机大小，但会出现错误，可能与光盘文件有关。  个人认为最有效的方式是在正确安装了VMware...</div></div></div></a></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><a class="pagination-related" href="/posts/1c48dc28.html" title="深度学习花书笔记（待更新中）"><img class="cover" src="/img/deeplearning/network.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2024-11-29</div><div class="info-item-2">深度学习花书笔记（待更新中）</div></div><div class="info-2"><div class="info-item-1">现存疑问1.  数学知识线性代数生成子空间一组向量的生成子空间：原始向量线性组合能抵达的点的集合。 用于判断方程是否有解。 范数${ L^p }$ 范数定义：$$\left | x_p \right |  &#x3D; \left (\displaystyle\sum_{i}|x_i|^p \right )^{\frac{1}{p}}$$${ L^0 }$范数：向量中非零元素的个数。 ${ L^1 }$范数：向量中所有元素绝对值之和。 ${ L^2 }$范数（欧几里得范数）：向量元素绝对值的平方和再开方，计算向量长度。 ${ Frobenius}$范数：所有元素的平方和再开方，衡量矩阵大小。$${\left | A \right |}F &#x3D; \sqrt{\sum{i,j}A_{i,j}^{2} }$$${ L^ \infty  }$范数：向量中所有元素中最大的绝对值。 奇异值分解特征分解：$$A &#x3D; Vdiag(\lambda )V^{-1}$$奇异值分解：$$A &#x3D; UDV^T$$ ${ A_{m\times n},  U_{m\times...</div></div></div></a><a class="pagination-related" href="/posts/285f5460.html" title="prompt工程学习"><img class="cover" src="/img/24-1.png" alt="cover"><div class="info text-center"><div class="info-1"><div class="info-item-1"><i class="far fa-calendar-alt fa-fw"></i> 2025-03-10</div><div class="info-item-2">prompt工程学习</div></div><div class="info-2"><div class="info-item-1">前置知识： 1.轻松搞懂 Zero-Shot、One-Shot、Few-Shot - 知乎  Zero-Shot零样本学习：测试集中出现了训练集中没有的类别。需要模型通过对这个类别的描述，对没见过的类别进行分类。 One-Shot一次性学习：给出一个样例，可以理解为用一条数据fine-tune模型。属于Few-Shot学习的特例。 Few-Shot少样本学习：对于只有少量样本的类别，希望模型在学习了一定类别的大量数据后，只需要少量的样本就能快速学习。  2.大模型「幻觉」，看这一篇就够了 | 哈工大华为出品 - 知乎 大模型幻觉问题：模型生成的内容与现实世界事实或用户输入不一致的现象。 CoT思维链参考链接：一文读懂：思维链 CoT（Chain of Thought） - 知乎 在从输入到输出的过程中加入详细的推理小步骤有助于提升推理能力。 完整包含 CoT 的 Prompt 由指令（Instruction），逻辑依据（Rationale），示例（Exemplars）三部分组成。模型规模小、任务简单的情况下，CoT无效。 不添加示例而仅仅在指令中添加一行经典的“Let’s...</div></div></div></a></div></div><hr class="custom-hr"/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div class="vcomment" id="vcomment"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info text-center"><div class="avatar-img"><img src="/img/24-2.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info-name">MugaiAshe</div><div class="author-info-description">莫听穿林打叶声，何妨吟啸且徐行</div><div class="site-data"><a href="/archives/"><div class="headline">文章</div><div class="length-num">12</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">9</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/mugaiAshe"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons"><a class="social-icon" href="https://github.com/mugaiAshe" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="/songtt7@mail2.sysu.edu.cn" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">绝赞建设中——</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-NLP%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86"><span class="toc-number">1.</span> <span class="toc-text">1.NLP基础知识</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E6%96%87%E6%9C%AC%E5%A4%84%E7%90%86%E5%9F%BA%E7%A1%80"><span class="toc-number">1.1.</span> <span class="toc-text">1.1 文本处理基础</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Tokenizer%EF%BC%9A%E5%88%86%E8%AF%8D%E5%99%A8"><span class="toc-number">1.1.1.</span> <span class="toc-text">Tokenizer：分词器</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#BPE%EF%BC%9AByte-Pair-Encoding%EF%BC%88Subword%EF%BC%89"><span class="toc-number">1.1.1.1.</span> <span class="toc-text">BPE：Byte Pair Encoding（Subword）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#WordPiece%EF%BC%88Subword%EF%BC%89"><span class="toc-number">1.1.1.2.</span> <span class="toc-text">WordPiece（Subword）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#SentencePiece"><span class="toc-number">1.1.1.3.</span> <span class="toc-text">SentencePiece</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Unigram"><span class="toc-number">1.1.1.4.</span> <span class="toc-text">Unigram</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#BBPE"><span class="toc-number">1.1.1.5.</span> <span class="toc-text">BBPE</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Embedding%EF%BC%9A%E5%B5%8C%E5%85%A5%E5%B1%82"><span class="toc-number">1.1.2.</span> <span class="toc-text">Embedding：嵌入层</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#One-hot%EF%BC%9A%E7%8B%AC%E7%83%AD%E8%A1%A8%E7%A4%BA"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">One-hot：独热表示</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Word2Vec"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">Word2Vec</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#FastText"><span class="toc-number">1.1.2.3.</span> <span class="toc-text">FastText</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#GloVe"><span class="toc-number">1.1.2.4.</span> <span class="toc-text">GloVe</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E6%A0%B8%E5%BF%83%E6%9E%B6%E6%9E%84%E7%BB%84%E4%BB%B6"><span class="toc-number">1.2.</span> <span class="toc-text">1.2 核心架构组件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%9C%BA%E5%88%B6"><span class="toc-number">1.2.1.</span> <span class="toc-text">注意力机制</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Self-Attention%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B"><span class="toc-number">1.2.1.1.</span> <span class="toc-text">Self-Attention自注意力</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Cross-Attention%E4%BA%A4%E5%8F%89%E6%B3%A8%E6%84%8F%E5%8A%9B"><span class="toc-number">1.2.1.2.</span> <span class="toc-text">Cross-Attention交叉注意力</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Multi-Head-Attention%E5%A4%9A%E5%A4%B4%E6%B3%A8%E6%84%8F%E5%8A%9B"><span class="toc-number">1.2.1.3.</span> <span class="toc-text">Multi-Head Attention多头注意力</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Mask-Attention"><span class="toc-number">1.2.1.4.</span> <span class="toc-text">Mask-Attention</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%8D%E7%BD%AE%E7%BC%96%E7%A0%81"><span class="toc-number">1.2.2.</span> <span class="toc-text">位置编码</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%BB%9D%E5%AF%B9%E4%BD%8D%E7%BD%AE%E7%BC%96%E7%A0%81"><span class="toc-number">1.2.2.1.</span> <span class="toc-text">绝对位置编码</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8F%AF%E5%AD%A6%E4%B9%A0%E7%9A%84%E4%BD%8D%E7%BD%AE%E7%BC%96%E7%A0%81"><span class="toc-number">1.2.2.2.</span> <span class="toc-text">可学习的位置编码</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%9B%B8%E5%AF%B9%E4%BD%8D%E7%BD%AE%E7%BC%96%E7%A0%81"><span class="toc-number">1.2.2.3.</span> <span class="toc-text">相对位置编码</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#ROPE%EF%BC%9A%E6%97%8B%E8%BD%AC%E4%BD%8D%E7%BD%AE%E7%BC%96%E7%A0%81"><span class="toc-number">1.2.2.4.</span> <span class="toc-text">ROPE：旋转位置编码</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BD%92%E4%B8%80%E5%8C%96%E6%8A%80%E6%9C%AF"><span class="toc-number">1.2.3.</span> <span class="toc-text">归一化技术</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#BatchNorm"><span class="toc-number">1.2.3.1.</span> <span class="toc-text">BatchNorm</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Layer-Norm"><span class="toc-number">1.2.3.2.</span> <span class="toc-text">Layer Norm</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#RMSNorm"><span class="toc-number">1.2.3.3.</span> <span class="toc-text">RMSNorm</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#DeepNorm"><span class="toc-number">1.2.3.4.</span> <span class="toc-text">DeepNorm</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AE%8B%E5%B7%AE%E8%BF%9E%E6%8E%A5"><span class="toc-number">1.2.4.</span> <span class="toc-text">残差连接</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E5%9F%BA%E7%A1%80"><span class="toc-number">1.3.</span> <span class="toc-text">1.3 神经网络基础</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#MLP"><span class="toc-number">1.3.1.</span> <span class="toc-text">MLP</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%B6%85%E5%8F%82%E6%95%B0"><span class="toc-number">1.3.1.1.</span> <span class="toc-text">超参数</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%9B%B4%E6%96%B0%E8%8A%82%E7%82%B9%E6%9D%83%E9%87%8D"><span class="toc-number">1.3.1.2.</span> <span class="toc-text">更新节点权重</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Transformer%E4%B8%AD%E5%89%8D%E9%A6%88%E7%A5%9E%E7%BB%8F%E7%BD%91%E7%BB%9C%E7%9A%84%E7%BB%93%E6%9E%84%E8%AE%BE%E8%AE%A1"><span class="toc-number">1.3.1.3.</span> <span class="toc-text">Transformer中前馈神经网络的结构设计</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%8D%E5%90%8C%E7%BB%B4%E5%BA%A6%E6%8A%95%E5%BD%B1%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-number">1.3.1.4.</span> <span class="toc-text">不同维度投影的作用</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0"><span class="toc-number">1.3.2.</span> <span class="toc-text">激活函数</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#sigmoid"><span class="toc-number">1.3.2.1.</span> <span class="toc-text">sigmoid</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Tanh%E5%87%BD%E6%95%B0"><span class="toc-number">1.3.2.2.</span> <span class="toc-text">Tanh函数</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#ReLU"><span class="toc-number">1.3.2.3.</span> <span class="toc-text">ReLU</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#GELU"><span class="toc-number">1.3.2.3.1.</span> <span class="toc-text">GELU</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#softmax"><span class="toc-number">1.3.2.3.2.</span> <span class="toc-text">softmax</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#SwiGLU"><span class="toc-number">1.3.2.4.</span> <span class="toc-text">SwiGLU</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#Swish%E5%87%BD%E6%95%B0"><span class="toc-number">1.3.2.4.1.</span> <span class="toc-text">Swish函数</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#GLU-Gated-Linear-Unit"><span class="toc-number">1.3.2.4.2.</span> <span class="toc-text">GLU (Gated Linear Unit)</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%BF%80%E6%B4%BB%E5%87%BD%E6%95%B0%E9%80%89%E6%8B%A9%E7%9A%84%E8%80%83%E8%99%91%E5%9B%A0%E7%B4%A0"><span class="toc-number">1.3.2.5.</span> <span class="toc-text">激活函数选择的考虑因素</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0"><span class="toc-number">1.3.3.</span> <span class="toc-text">损失函数</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BA%A4%E5%8F%89%E7%86%B5%E6%8D%9F%E5%A4%B1"><span class="toc-number">1.3.3.1.</span> <span class="toc-text">交叉熵损失</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BC%98%E5%8C%96%E5%99%A8"><span class="toc-number">1.3.4.</span> <span class="toc-text">优化器</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%87%AA%E9%80%82%E5%BA%94%E7%9F%A9%E4%BC%B0%E8%AE%A1Adam"><span class="toc-number">1.3.4.1.</span> <span class="toc-text">自适应矩估计Adam</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Adamax"><span class="toc-number">1.3.4.2.</span> <span class="toc-text">Adamax</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#AdamW"><span class="toc-number">1.3.4.3.</span> <span class="toc-text">AdamW</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E9%A2%84%E8%AE%AD%E7%BB%83%E6%8A%80%E6%9C%AF"><span class="toc-number">2.</span> <span class="toc-text">2.预训练技术</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86"><span class="toc-number">2.1.</span> <span class="toc-text">2.1 数据处理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%8E%B7%E5%8F%96%E6%96%B9%E6%B3%95"><span class="toc-number">2.1.1.</span> <span class="toc-text">数据获取方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%B8%85%E6%B4%97%E6%8A%80%E6%9C%AF"><span class="toc-number">2.1.2.</span> <span class="toc-text">数据清洗技术</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%96%87%E6%9C%AC%E5%8E%BB%E9%87%8D%EF%BC%9AMinHash"><span class="toc-number">2.1.2.1.</span> <span class="toc-text">文本去重：MinHash</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%AE%AD%E7%BB%83%E6%95%B0%E6%8D%AE%E9%85%8D%E6%AF%94%E7%AD%96%E7%95%A5"><span class="toc-number">2.1.2.2.</span> <span class="toc-text">训练数据配比策略</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E9%A2%84%E8%AE%AD%E7%BB%83%E6%B5%81%E7%A8%8B"><span class="toc-number">2.2.</span> <span class="toc-text">2.2 预训练流程</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%AD%E7%BB%83%E7%AD%96%E7%95%A5"><span class="toc-number">2.2.1.</span> <span class="toc-text">训练策略</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%8F%90%E5%89%8D%E5%81%9C%E6%AD%A2"><span class="toc-number">2.2.1.1.</span> <span class="toc-text">提前停止</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E9%A2%84%E7%83%AD"><span class="toc-number">2.2.1.2.</span> <span class="toc-text">预热</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%AD%A6%E4%B9%A0%E7%8E%87%E8%A1%B0%E5%87%8F"><span class="toc-number">2.2.1.3.</span> <span class="toc-text">学习率衰减</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A2%84%E8%AE%AD%E7%BB%83%E4%BC%98%E5%8C%96"><span class="toc-number">2.2.2.</span> <span class="toc-text">预训练优化</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%A2%AF%E5%BA%A6%E7%B4%AF%E7%A7%AF"><span class="toc-number">2.2.2.1.</span> <span class="toc-text">梯度累积</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%B7%B7%E5%90%88%E7%B2%BE%E5%BA%A6%E8%AE%AD%E7%BB%83"><span class="toc-number">2.2.2.2.</span> <span class="toc-text">混合精度训练</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%A8%A1%E5%9E%8B%E5%B9%B6%E8%A1%8C"><span class="toc-number">2.2.2.3.</span> <span class="toc-text">模型并行</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%B9%B6%E8%A1%8C"><span class="toc-number">2.2.2.4.</span> <span class="toc-text">数据并行</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%B7%B7%E5%90%88%E5%B9%B6%E8%A1%8C"><span class="toc-number">2.2.2.5.</span> <span class="toc-text">混合并行</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%9D%83%E9%87%8D%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-number">2.2.2.6.</span> <span class="toc-text">权重初始化</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%A2%AF%E5%BA%A6%E8%A3%81%E5%89%AA"><span class="toc-number">2.2.2.7.</span> <span class="toc-text">梯度裁剪</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%BF%80%E6%B4%BB%E6%A3%80%E6%9F%A5%E7%82%B9"><span class="toc-number">2.2.2.8.</span> <span class="toc-text">激活检查点</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E7%BB%93%E6%9E%9C%E8%AF%84%E4%BC%B0"><span class="toc-number">2.3.</span> <span class="toc-text">2.3 结果评估</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B5%8B%E8%AF%84%E6%95%B0%E6%8D%AE%E9%9B%86"><span class="toc-number">2.3.1.</span> <span class="toc-text">测评数据集</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#MMLU"><span class="toc-number">2.3.1.1.</span> <span class="toc-text">MMLU</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#IF-EVAL"><span class="toc-number">2.3.1.2.</span> <span class="toc-text">IF-EVAL</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#MATH"><span class="toc-number">2.3.1.3.</span> <span class="toc-text">MATH</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%84%E4%BC%B0%E6%8C%87%E6%A0%87"><span class="toc-number">2.3.2.</span> <span class="toc-text">评估指标</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#F1-score"><span class="toc-number">2.3.2.1.</span> <span class="toc-text">F1 score</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#EM"><span class="toc-number">2.3.2.2.</span> <span class="toc-text">EM</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#BLEU"><span class="toc-number">2.3.2.3.</span> <span class="toc-text">BLEU</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#ROUGE"><span class="toc-number">2.3.2.4.</span> <span class="toc-text">ROUGE</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-%E5%A2%9E%E9%87%8F%E9%A2%84%E8%AE%AD%E7%BB%83%EF%BC%9A%E9%A2%86%E5%9F%9F%E7%9F%A5%E8%AF%86"><span class="toc-number">2.4.</span> <span class="toc-text">2.4 增量预训练：领域知识</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E5%90%8E%E8%AE%AD%E7%BB%83%E6%8A%80%E6%9C%AF"><span class="toc-number">3.</span> <span class="toc-text">3.后训练技术</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E7%9B%91%E7%9D%A3%E5%BE%AE%E8%B0%83-SFT"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 监督微调(SFT)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E5%BE%AE%E8%B0%83%E6%8A%80%E6%9C%AF"><span class="toc-number">3.1.1.</span> <span class="toc-text">基础微调技术</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%85%A8%E5%8F%82%E6%95%B0%E5%BE%AE%E8%B0%83"><span class="toc-number">3.1.1.1.</span> <span class="toc-text">全参数微调</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%AB%98%E6%95%88%E5%8F%82%E6%95%B0%E5%BE%AE%E8%B0%83"><span class="toc-number">3.1.2.</span> <span class="toc-text">高效参数微调</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#LORA"><span class="toc-number">3.1.2.1.</span> <span class="toc-text">LORA</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#QLORA"><span class="toc-number">3.1.2.2.</span> <span class="toc-text">QLORA</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Prefix-Tuning"><span class="toc-number">3.1.2.3.</span> <span class="toc-text">Prefix Tuning</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#P-Tuning"><span class="toc-number">3.1.2.4.</span> <span class="toc-text">P-Tuning</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#P-TuningV2"><span class="toc-number">3.1.2.5.</span> <span class="toc-text">P-TuningV2</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#Adapter-Tuning"><span class="toc-number">3.1.2.6.</span> <span class="toc-text">Adapter Tuning</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E4%BA%BA%E7%B1%BB%E5%81%8F%E5%A5%BD%E5%AF%B9%E9%BD%90"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 人类偏好对齐</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#RLHF%E6%8A%80%E6%9C%AF"><span class="toc-number">3.2.1.</span> <span class="toc-text">RLHF技术</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%9E%84%E5%BB%BA%E8%BF%87%E7%A8%8B"><span class="toc-number">3.2.1.1.</span> <span class="toc-text">数据构建过程</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%A5%96%E5%8A%B1%E6%A8%A1%E5%9E%8B%E8%AE%AD%E7%BB%83%E8%BF%87%E7%A8%8B"><span class="toc-number">3.2.1.2.</span> <span class="toc-text">奖励模型训练过程</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#PPO"><span class="toc-number">3.2.1.3.</span> <span class="toc-text">PPO</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#DPO"><span class="toc-number">3.2.1.4.</span> <span class="toc-text">DPO</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%89%8D%E6%B2%BF%E5%AF%B9%E9%BD%90%E7%AE%97%E6%B3%95"><span class="toc-number">3.2.1.5.</span> <span class="toc-text">前沿对齐算法</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E6%8E%A8%E7%90%86%E5%8A%A0%E9%80%9F"><span class="toc-number">4.</span> <span class="toc-text">4.推理加速</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E6%A1%86%E6%9E%B6%E5%BA%94%E7%94%A8"><span class="toc-number">4.1.</span> <span class="toc-text">4.1 框架应用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#DeepSpeed"><span class="toc-number">4.1.1.</span> <span class="toc-text">DeepSpeed</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Megatron-LM"><span class="toc-number">4.1.2.</span> <span class="toc-text">Megatron-LM</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E6%80%A7%E8%83%BD%E4%BC%98%E5%8C%96%E7%AE%97%E6%B3%95"><span class="toc-number">4.2.</span> <span class="toc-text">4.2 性能优化算法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#KV-Cache%E6%8A%80%E6%9C%AF"><span class="toc-number">4.2.1.</span> <span class="toc-text">KV Cache技术</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E5%8A%9B%E4%BC%98%E5%8C%96"><span class="toc-number">4.2.2.</span> <span class="toc-text">注意力优化</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#FlashAttention"><span class="toc-number">4.2.2.1.</span> <span class="toc-text">FlashAttention</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#FlashAttentionV2"><span class="toc-number">4.2.2.2.</span> <span class="toc-text">FlashAttentionV2</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#pageAttention"><span class="toc-number">4.2.2.3.</span> <span class="toc-text">pageAttention</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-%E7%9F%A5%E8%AF%86%E8%92%B8%E9%A6%8F"><span class="toc-number">4.3.</span> <span class="toc-text">4.3 知识蒸馏</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9A%97%E7%9F%A5%E8%AF%86"><span class="toc-number">4.3.1.</span> <span class="toc-text">暗知识</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8D%9F%E5%A4%B1%E5%87%BD%E6%95%B0-1"><span class="toc-number">4.3.2.</span> <span class="toc-text">损失函数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%89%B9%E5%BE%81%E5%BC%8F%E7%9F%A5%E8%AF%86%E8%92%B8%E9%A6%8F"><span class="toc-number">4.3.3.</span> <span class="toc-text">特征式知识蒸馏</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4-%E6%A8%A1%E5%9E%8B%E9%87%8F%E5%8C%96"><span class="toc-number">4.4.</span> <span class="toc-text">4.4 模型量化</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9D%9E%E5%AF%B9%E7%A7%B0%E9%87%8F%E5%8C%96"><span class="toc-number">4.4.1.</span> <span class="toc-text">非对称量化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%AD%E7%BB%83%E5%90%8E%E9%87%8F%E5%8C%96PTQ"><span class="toc-number">4.4.2.</span> <span class="toc-text">训练后量化PTQ</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%87%8F%E5%8C%96%E6%84%9F%E7%9F%A5%E8%AE%AD%E7%BB%83QAT"><span class="toc-number">4.4.3.</span> <span class="toc-text">量化感知训练QAT</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8A%A8-%E9%9D%99%E6%80%81%E9%87%8F%E5%8C%96"><span class="toc-number">4.4.4.</span> <span class="toc-text">动&#x2F;静态量化</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%87%8F%E5%8C%96%E6%84%9F%E7%9F%A5%E5%BE%AE%E8%B0%83"><span class="toc-number">4.4.5.</span> <span class="toc-text">量化感知微调</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-5-%E5%85%B6%E4%BB%96%E6%A8%A1%E5%9E%8B%E5%8E%8B%E7%BC%A9%E5%92%8C%E5%8A%A0%E9%80%9F%E6%96%B9%E6%B3%95"><span class="toc-number">4.5.</span> <span class="toc-text">4.5 其他模型压缩和加速方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%92%B8%E9%A6%8F%E5%AF%B9%E6%8A%97%E7%BD%91%E7%BB%9C"><span class="toc-number">4.5.1.</span> <span class="toc-text">蒸馏对抗网络</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8D%B7%E7%A7%AF%E5%88%86%E8%A7%A3"><span class="toc-number">4.5.2.</span> <span class="toc-text">卷积分解</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%B8%B8%E8%A7%81%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%9E%B6%E6%9E%84"><span class="toc-number">5.</span> <span class="toc-text">5.常见大模型架构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-%E7%BB%8F%E5%85%B8%E6%9E%B6%E6%9E%84"><span class="toc-number">5.1.</span> <span class="toc-text">5.1 经典架构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-%E5%88%9B%E6%96%B0%E6%9E%B6%E6%9E%84"><span class="toc-number">5.2.</span> <span class="toc-text">5.2 创新架构</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8"><span class="toc-number">6.</span> <span class="toc-text">6.大模型应用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-%E6%A3%80%E7%B4%A2%E5%A2%9E%E5%BC%BA%E7%94%9F%E6%88%90-RAG"><span class="toc-number">6.1.</span> <span class="toc-text">6.1 检索增强生成(RAG)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-Agent"><span class="toc-number">6.2.</span> <span class="toc-text">6.2 Agent</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/70c361d5.html" title="go语言从零入门学习笔记（持续更新中）">go语言从零入门学习笔记（持续更新中）</a><time datetime="2025-10-25T00:58:13.000Z" title="发表于 2025-10-25 08:58:13">2025-10-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/81c7eb00.html" title="大模型自学笔记（待更新中）"><img src="/img/deeplearning/network.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="大模型自学笔记（待更新中）"/></a><div class="content"><a class="title" href="/posts/81c7eb00.html" title="大模型自学笔记（待更新中）">大模型自学笔记（待更新中）</a><time datetime="2025-10-14T11:03:21.000Z" title="发表于 2025-10-14 19:03:21">2025-10-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/ded5e95e.html" title="妙手回春拯救死刑虚拟机&amp;缩小虚拟机文件大小"><img src="/img/head1.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="妙手回春拯救死刑虚拟机&amp;缩小虚拟机文件大小"/></a><div class="content"><a class="title" href="/posts/ded5e95e.html" title="妙手回春拯救死刑虚拟机&amp;缩小虚拟机文件大小">妙手回春拯救死刑虚拟机&amp;缩小虚拟机文件大小</a><time datetime="2025-04-19T09:41:38.000Z" title="发表于 2025-04-19 17:41:38">2025-04-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/posts/285f5460.html" title="prompt工程学习"><img src="/img/24-1.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="prompt工程学习"/></a><div class="content"><a class="title" href="/posts/285f5460.html" title="prompt工程学习">prompt工程学习</a><time datetime="2025-03-10T12:21:27.000Z" title="发表于 2025-03-10 20:21:27">2025-03-10</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/posts/8363d6d0.html" title="IDA超快速上手干货">IDA超快速上手干货</a><time datetime="2025-02-15T07:46:51.000Z" title="发表于 2025-02-15 15:46:51">2025-02-15</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2019 - 2025 By MugaiAshe</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="日间和夜间模式切换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="前往评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/medium-zoom/dist/medium-zoom.min.js"></script><div class="js-pjax"><script>(() => {
+  const loadMathjax = () => {
+    if (!window.MathJax) {
+      window.MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']],
+          tags: 'none',
+        },
+        chtml: {
+          scale: 1.1
+        },
+        options: {
+          enableMenu: true,
+          renderActions: {
+            findScript: [10, doc => {
+              for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+                const display = !!node.type.match(/; *mode=display/)
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+                const text = document.createTextNode('')
+                node.parentNode.replaceChild(text, node)
+                math.start = {node: text, delim: '', n: 0}
+                math.end = {node: text, delim: '', n: 0}
+                doc.math.push(math)
+              }
+            }, '']
+          }
+        }
+      }
+      
+      const script = document.createElement('script')
+      script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+      script.id = 'MathJax-script'
+      script.async = true
+      document.head.appendChild(script)
+    } else {
+      MathJax.startup.document.state(0)
+      MathJax.texReset()
+      MathJax.typesetPromise()
+    }
+  }
+
+  btf.addGlobalFn('encrypt', loadMathjax, 'mathjax')
+  window.pjax ? loadMathjax() : window.addEventListener('load', loadMathjax)
+})()</script><script>(() => {
+  const initValine = () => {
+    const valine = new Valine(Object.assign({
+      el: '#vcomment',
+      appId: 'HmMjY3kJ0XJGmrd3vlNjFVhb-gzGzoHsz',
+      appKey: 'hDMVPIwqaIAFUKNHeFwxF1Fo',
+      avatar: 'monsterid',
+      serverURLs: '',
+      emojiMaps: {"tv_啊":"a.png","tv_啊这":"azhe.png","tv_飙泪":"biaolei.png","tv_不懂":"budong.png","tv_大哭":"daku.png","tv_点赞":"dianzan.png","tv_低落":"diluo.png","tv_懂了":"dongle.png","tv_fine":"fine.png","tv_感谢":"hanxie.png","tv_好耶":"haoye.png","tv_嘿":"hei.png","tv_嘿嘿":"heihei.png","tv_骄傲":"jiaoao.png","tv_加油":"jiayou.png","tv_举花":"juhua.png","tv_可恶":"kewu.png","tv_来看画":"laikanhua.png","tv_恼":"nao.png","tv_哪有":"nayou.png","tv_oops":"oops.png","tv_拍肩":"paijian.png","tv_期待":"qidai.png","tv_死了":"sile.png","tv_wow":"wow.png","tv_嫌弃哭":"xianqiku.png","tv_笑死":"xiaosi.png","tv_学习了吗":"xuexilema.png","tv_耶":"ye.png"},
+      path: window.location.pathname,
+      visitor: true
+    }, {"enableQQ":true,"emojiCDN":"https://mugaiashe.github.io/ocemoji/"}))
+  }
+
+  const loadValine = async () => {
+    if (typeof Valine === 'function') initValine()
+    else {
+      await btf.getScript('https://cdn.jsdelivr.net/npm/valine/dist/Valine.min.js')
+      initValine()
+    }
+  }
+
+  if ('Valine' === 'Valine' || !true) {
+    if (true) btf.loadComment(document.getElementById('vcomment'),loadValine)
+    else setTimeout(loadValine, 0)
+  } else {
+    window.loadOtherComment = loadValine
+  }
+})()</script></div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="true"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-heart" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/click-heart.min.js" async="async" mobile="true"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><!-- hexo injector body_end start --><script data-pjax src="https://unpkg.com/oh-my-live2d"></script><script>const oml2d = OML2D.loadOml2d({dockedPosition:"left",mobileDisplay:false,models:[{"path":"/live2d_models/lizhi/lizhi.model3.json","position":[-30,-10],"scale":0.16,"stageStyle":{"width":500,"height":500},"mobilePosition":[0,0],"mobileScale":0.08,"mobileStageStyle":{"width":180,"height":166},"motionPreloadStrategy":"ALL"}],parentElement:document.body,primaryColor:"var(--btn-bg)",sayHello:false,tips:{style: {"width":230,"height":120,"left":"calc(50% - 20px)","top":"-100px"},mobileStyle: {"width":180,"height":80,"left":"calc(50% - 30px)","top":"-100px"},idleTips:{interval:3600,message:["你好呀，我是木盖~","欢迎来到我的小站~"]}}});</script><!-- hexo injector body_end end --></body></html>
